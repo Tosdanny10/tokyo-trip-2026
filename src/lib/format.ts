@@ -19,20 +19,18 @@ export function mapsDirections(origin: string, destination: string, travelmode: 
   return `https://www.google.com/maps/dir/?${params.toString()}`;
 }
 
+/**
+ * Tabelog 搜尋連結。
+ * 使用 Tabelog 官方的搜尋頁參數，不自行拼湊個別店家的頁面網址。
+ */
+export function tabelogSearch(keyword: string): string {
+  return `https://tabelog.com/rstLst/?sw=${encodeURIComponent(keyword)}`;
+}
+
 /** 把資料檔裡的 {{hotel}} 等樣板變數換成使用者設定的住宿資料 */
 export function resolveText(text: string, hotel: Hotel): string {
   return text
     .replaceAll('{{hotel}}', hotel.name)
     .replaceAll('{{hotelStation}}', hotel.nearestStation)
     .replaceAll('{{hotelAddress}}', hotel.address);
-}
-
-const jpyFormatter = new Intl.NumberFormat('zh-TW', { maximumFractionDigits: 0 });
-
-export function formatJpy(value: number): string {
-  return `¥${jpyFormatter.format(Math.round(value))}`;
-}
-
-export function formatTwd(valueJpy: number, rate: number): string {
-  return `NT$${jpyFormatter.format(Math.round(valueJpy * rate))}`;
 }

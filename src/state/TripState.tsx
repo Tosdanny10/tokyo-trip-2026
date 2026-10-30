@@ -1,42 +1,43 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { Hotel, ReserveStatus } from '../data/types';
-import { defaultHotel, meta } from '../data/itinerary';
+import { defaultHotel } from '../data/itinerary';
 
 const STORAGE_KEY = 'tokyo-trip-2026/v1';
+/**
+ * 資料版本。
+ * v2 起住宿改為「赤羽霍利克飯店」，舊版存的佔位飯店要換掉，
+ * 但勾選、預約狀態、實付金額與交通備註全部保留。
+ */
+const SCHEMA_VERSION = 2;
 
 /**
  * 全部存在使用者自己的瀏覽器 localStorage，不會上傳任何個人資料。
  */
 export interface TripState {
+  /** 資料版本，用來做欄位遷移 */
+  version: number;
   hotel: Hotel;
-  /** 1 JPY = rate TWD（手動維護） */
-  rate: number;
   /** 行程勾選狀態 */
   checked: Record<string, boolean>;
   /** 使用者覆寫的預約狀態 */
   reserveOverride: Record<string, ReserveStatus>;
-  /** 實際付款金額（兩人合計，日圓） */
-  actual: Record<string, number>;
   /** 交通卡片的使用者備註 / 自行調整的時間 */
   transitNote: Record<string, string>;
 }
 
 const emptyState: TripState = {
+  version: SCHEMA_VERSION,
   hotel: defaultHotel,
-  rate: meta.defaultRate,
   checked: {},
   reserveOverride: {},
-  actual: {},
   transitNote: {},
 };
 
 interface TripContextValue extends TripState {
   setHotel: (patch: Partial<Hotel>) => void;
-  setRate: (rate: number) => void;
   toggleChecked: (id: string) => void;
   setReserve: (id: string, status: ReserveStatus | null) => void;
-  setActual: (id: string, jpy: number | null) => void;
   setTransitNote: (id: string, note: string) => void;
   resetAll: () => void;
 }
@@ -49,13 +50,17 @@ function load(): TripState {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return emptyState;
     const parsed = JSON.parse(raw) as Partial<TripState>;
+    // 版本比 SCHEMA_VERSION 舊的，住宿一律換成新的預設飯店（赤羽霍利克飯店）；
+    // 其他使用者資料（勾選、預約狀態、實付金額、交通備註）照舊保留。
+    const outdated = (parsed.version ?? 1) < SCHEMA_VERSION;
+    const hotel = outdated ? defaultHotel : { ...defaultHotel, ...(parsed.hotel ?? {}) };
     return {
       ...emptyState,
       ...parsed,
-      hotel: { ...defaultHotel, ...(parsed.hotel ?? {}) },
+      version: SCHEMA_VERSION,
+      hotel,
       checked: parsed.checked ?? {},
       reserveOverride: parsed.reserveOverride ?? {},
-      actual: parsed.actual ?? {},
       transitNote: parsed.transitNote ?? {},
     };
   } catch {
@@ -78,10 +83,6 @@ export function TripProvider({ children }: { children: ReactNode }) {
     setState((s) => ({ ...s, hotel: { ...s.hotel, ...patch } }));
   }, []);
 
-  const setRate = useCallback((rate: number) => {
-    setState((s) => ({ ...s, rate }));
-  }, []);
-
   const toggleChecked = useCallback((id: string) => {
     setState((s) => ({ ...s, checked: { ...s.checked, [id]: !s.checked[id] } }));
   }, []);
@@ -92,15 +93,6 @@ export function TripProvider({ children }: { children: ReactNode }) {
       if (status === null) delete next[id];
       else next[id] = status;
       return { ...s, reserveOverride: next };
-    });
-  }, []);
-
-  const setActual = useCallback((id: string, jpy: number | null) => {
-    setState((s) => {
-      const next = { ...s.actual };
-      if (jpy === null || Number.isNaN(jpy)) delete next[id];
-      else next[id] = jpy;
-      return { ...s, actual: next };
     });
   }, []);
 
@@ -116,8 +108,8 @@ export function TripProvider({ children }: { children: ReactNode }) {
   const resetAll = useCallback(() => setState(emptyState), []);
 
   const value = useMemo<TripContextValue>(
-    () => ({ ...state, setHotel, setRate, toggleChecked, setReserve, setActual, setTransitNote, resetAll }),
-    [state, setHotel, setRate, toggleChecked, setReserve, setActual, setTransitNote, resetAll],
+    () => ({ ...state, setHotel, toggleChecked, setReserve, setTransitNote, resetAll }),
+    [state, setHotel, toggleChecked, setReserve, setTransitNote, resetAll],
   );
 
   return <TripContext.Provider value={value}>{children}</TripContext.Provider>;

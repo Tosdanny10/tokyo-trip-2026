@@ -14,7 +14,7 @@ function Bag({ x, y, s = 1, fill = C.sakura, handle = C.ink }: { x: number; y: n
 /** 忠犬八公像 + 斑馬線 */
 export function Hachiko() {
   return (
-    <Frame label="忠犬八公像與澀谷斑馬線的插畫" tint="#EAEFF3">
+    <Frame label="忠犬八公像與澀谷斑馬線的插畫" tint="#F6EEF2">
       {/* 斑馬線 */}
       <g fill={C.white}>
         <rect x="8" y="64" width="104" height="4" rx="2" />
@@ -49,7 +49,7 @@ export function Hachiko() {
 /** SHIBUYA 109 */
 export function Shibuya109() {
   return (
-    <Frame label="SHIBUYA 109 圓筒大樓與購物袋的插畫" tint="#F3E7EE">
+    <Frame label="SHIBUYA 109 圓筒大樓與購物袋的插畫" tint="#FBE9F0">
       {/* 圓筒大樓 */}
       <path d="M38 76 L38 26 a16 10 0 0 1 32 0 L70 76 Z" fill={C.white} />
       <path d="M38 26 a16 10 0 0 1 32 0 a16 10 0 0 1 -32 0 Z" fill={C.sakura} />
@@ -74,7 +74,7 @@ export function Shibuya109() {
 /** PARCO：遊戲機與購物袋 */
 export function Parco() {
   return (
-    <Frame label="遊戲手把、遊戲機與購物袋的插畫" tint="#EAEAF4">
+    <Frame label="遊戲手把、遊戲機與購物袋的插畫" tint="#F2EBF4">
       {/* 大樓 */}
       <rect x="14" y="22" width="34" height="54" rx="3" fill={C.white} />
       <g fill={C.sky} opacity="0.7">
@@ -116,7 +116,7 @@ export function Parco() {
 /** 中心街：衣架與藥妝 */
 export function StreetShopping() {
   return (
-    <Frame label="服飾衣架、藥妝與購物袋的插畫" tint="#F1EEE6">
+    <Frame label="服飾衣架、藥妝與購物袋的插畫" tint="#F9EFF1">
       {/* 衣架桿 */}
       <rect x="16" y="24" width="72" height="3" rx="1.5" fill={C.inkSoft} />
       <path d="M22 27 V72 M82 27 V72" stroke={C.inkSoft} strokeWidth="2.4" strokeLinecap="round" />
@@ -143,7 +143,7 @@ export function StreetShopping() {
 /** MIYASHITA PARK：屋頂公園 */
 export function RooftopPark() {
   return (
-    <Frame label="商場頂樓空中公園、長椅與咖啡的插畫" tint="#E9F1E7">
+    <Frame label="商場頂樓空中公園、長椅與咖啡的插畫" tint="#F0F2EE">
       {/* 建築 */}
       <rect x="14" y="44" width="92" height="34" rx="4" fill={C.white} />
       <g fill={C.sky} opacity="0.6">
@@ -181,7 +181,7 @@ export function RooftopPark() {
 /** 夜晚街景（新宿／澀谷夜間共用） */
 export function NeonNight() {
   return (
-    <Frame label="夜晚霓虹街景的插畫" tint="#E4E4F0">
+    <Frame label="夜晚霓虹街景的插畫" tint="#ECE6F0">
       <Moon x={102} y={16} s={1} />
       <Stars points={[[16, 14], [32, 22, 1], [62, 10, 1], [84, 24, 0.9]]} />
       {/* 大樓群 */}
@@ -218,7 +218,7 @@ export function NeonNight() {
 /** 阿美橫丁：商店街招牌與零食 */
 export function Ameyoko() {
   return (
-    <Frame label="阿美橫丁商店街招牌與零食水果的插畫" tint="#F6EEE0">
+    <Frame label="阿美橫丁商店街招牌與零食水果的插畫" tint="#FBEFEA">
       {/* 高架橋 */}
       <rect x="6" y="14" width="108" height="10" rx="3" fill="#8E9AA8" />
       <g fill="#7A8694">

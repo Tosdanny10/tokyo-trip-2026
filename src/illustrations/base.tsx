@@ -1,24 +1,28 @@
 import type { ReactNode } from 'react';
 
-/** 插畫共用色票（手帳風柔和色） */
+/**
+ * 插畫共用色票（Soft Pink 日系手帳風）。
+ * 整體偏粉嫩，但食物的蟹紅／鮭魚橘、鳥居的朱紅、銀杏的金黃
+ * 都在各插畫裡用自己的色碼，刻意不被粉色覆蓋。
+ */
 export const C = {
-  cream: '#FFFBF2',
-  paper: '#FFF4E2',
-  sakura: '#F3BECB',
-  sakuraDeep: '#E4899F',
+  cream: '#FFF8FA',
+  paper: '#FFF1F5',
+  sakura: '#F4AFC4',
+  sakuraDeep: '#D96B94',
   ginkgo: '#F6CE6A',
   ginkgoDeep: '#D99A1E',
   sage: '#A9C9AD',
   sageDeep: '#6E9B78',
-  sky: '#B6D8EA',
-  skyDeep: '#6FA8C8',
-  ink: '#4A4038',
-  inkSoft: '#9B8C7B',
+  sky: '#BBD7EA',
+  skyDeep: '#6A9CBC',
+  ink: '#49343D',
+  inkSoft: '#A38993',
   coral: '#E58268',
   red: '#D9644A',
   white: '#FFFFFF',
-  brown: '#C09468',
-  night: '#3C4A66',
+  brown: '#C59C86',
+  night: '#4A4668',
 } as const;
 
 interface FrameProps {

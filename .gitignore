@@ -1,8 +1,9 @@
-node_modules
+*.local
+*.tsbuildinfo
+.DS_Store
+.pages-test
+.vite
 dist
 dist-ssr
-*.local
-.DS_Store
-.vite
+node_modules
 npm-debug.log*
-.pages-test

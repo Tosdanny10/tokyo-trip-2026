@@ -3,7 +3,7 @@ import { C, Cloud, Dash, Frame, Moon, Stars } from './base';
 /** 桃園 T1 報到：櫃台、護照、行李箱 */
 export function AirportCheckin() {
   return (
-    <Frame label="機場報到：護照、行李箱與報到櫃台的插畫" tint="#EAF2F8">
+    <Frame label="機場報到：護照、行李箱與報到櫃台的插畫" tint="#F7EEF3">
       <Cloud x={22} y={18} s={0.8} />
       <Cloud x={96} y={14} s={0.6} />
       {/* 櫃台 */}
@@ -35,7 +35,7 @@ export function AirportCheckin() {
 /** 起飛：粉色小飛機爬升 */
 export function PlaneTakeoff() {
   return (
-    <Frame label="粉色小飛機起飛的插畫" tint="#F2E7EE">
+    <Frame label="粉色小飛機起飛的插畫" tint="#FCEAF1">
       <Cloud x={26} y={64} s={0.9} />
       <Cloud x={92} y={56} s={0.7} />
       <Dash d="M10 76 C34 72 48 58 70 40" color={C.sakuraDeep} />
@@ -55,7 +55,7 @@ export function PlaneTakeoff() {
 /** 深夜抵達：飛機降落 + 跑道燈 */
 export function PlaneLanding() {
   return (
-    <Frame label="深夜飛機降落在跑道上的插畫" tint="#E3E7F2">
+    <Frame label="深夜飛機降落在跑道上的插畫" tint="#EDE6F1">
       <Moon x={100} y={18} s={1.1} />
       <Stars points={[[20, 14], [34, 24, 1], [66, 12, 1], [84, 30, 0.9]]} />
       <Dash d="M14 24 C36 32 50 44 68 52" color={C.night} />
@@ -81,7 +81,7 @@ export function PlaneLanding() {
 /** 入境審查：護照蓋章 + 行李轉盤 */
 export function Immigration() {
   return (
-    <Frame label="入境審查蓋章與行李轉盤的插畫" tint="#EDEEF6">
+    <Frame label="入境審查蓋章與行李轉盤的插畫" tint="#F4ECF2">
       {/* 轉盤 */}
       <ellipse cx="62" cy="66" rx="44" ry="14" fill={C.inkSoft} opacity="0.3" />
       <ellipse cx="62" cy="63" rx="44" ry="13" fill={C.white} />
@@ -107,7 +107,7 @@ export function Immigration() {
 /** 日本計程車 */
 export function Taxi() {
   return (
-    <Frame label="日本計程車的插畫" tint="#FBF0D9">
+    <Frame label="日本計程車的插畫" tint="#FCF0E6">
       <Moon x={102} y={16} s={0.9} />
       <Stars points={[[16, 16], [30, 10, 1]]} />
       <g transform="translate(14 36)">
@@ -136,7 +136,7 @@ export function Taxi() {
 /** 飯店休息 */
 export function Hotel() {
   return (
-    <Frame label="飯店建築與休息的插畫" tint="#EFEAF4">
+    <Frame label="飯店建築與休息的插畫" tint="#F8EBF1">
       <Moon x={100} y={18} s={1} />
       <Stars points={[[18, 16], [34, 26, 1], [66, 12, 1]]} />
       <rect x="26" y="30" width="60" height="48" rx="5" fill={C.white} />
@@ -164,7 +164,7 @@ export function Hotel() {
 /** 早餐 */
 export function Breakfast() {
   return (
-    <Frame label="早餐吐司、咖啡與雞蛋的插畫" tint="#FDF1DF">
+    <Frame label="早餐吐司、咖啡與雞蛋的插畫" tint="#FDF0EA">
       {/* 盤子 */}
       <ellipse cx="46" cy="62" rx="30" ry="11" fill={C.white} />
       {/* 吐司 */}
@@ -188,7 +188,7 @@ export function Breakfast() {
 /** 退房寄放行李 */
 export function Checkout() {
   return (
-    <Frame label="退房與寄放行李的插畫" tint="#EDF1EA">
+    <Frame label="退房與寄放行李的插畫" tint="#F4EFF1">
       {/* 行李堆 */}
       <rect x="22" y="44" width="26" height="32" rx="5" fill={C.sky} />
       <rect x="30" y="44" width="10" height="32" fill={C.skyDeep} opacity="0.3" />
@@ -214,7 +214,7 @@ export function Checkout() {
 /** 京成 Skyliner */
 export function Skyliner() {
   return (
-    <Frame label="京成 Skyliner 特急列車的插畫" tint="#E6EFF7">
+    <Frame label="京成 Skyliner 特急列車的插畫" tint="#F0EBF6">
       <Cloud x={24} y={16} s={0.7} />
       {/* 列車 */}
       <g transform="translate(16 30)">
@@ -247,7 +247,7 @@ export function Skyliner() {
 /** 伴手禮盒 */
 export function Souvenir() {
   return (
-    <Frame label="彩色伴手禮盒與緞帶的插畫" tint="#FBECEF">
+    <Frame label="彩色伴手禮盒與緞帶的插畫" tint="#FCEAF1">
       {/* 大盒 */}
       <rect x="20" y="44" width="38" height="30" rx="4" fill={C.sakura} />
       <rect x="34" y="44" width="10" height="30" fill={C.white} opacity="0.8" />
@@ -269,7 +269,7 @@ export function Souvenir() {
 /** 報到櫃台・託運 */
 export function CheckinCounter() {
   return (
-    <Frame label="航空公司報到櫃台與行李託運的插畫" tint="#E9F0F6">
+    <Frame label="航空公司報到櫃台與行李託運的插畫" tint="#F6EDF2">
       {/* 看板 */}
       <rect x="20" y="16" width="44" height="14" rx="3" fill={C.night} opacity="0.85" />
       <g fill={C.ginkgo} opacity="0.9">

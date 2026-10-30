@@ -48,7 +48,7 @@ function Nigiri({ x, y, s = 1, topping = C.coral, stripe = true }: { x: number; 
 /** 蟹最上：雪蟹 + 握壽司 */
 export function Crab() {
   return (
-    <Frame label="雪蟹與握壽司的插畫" tint="#FBE9E4">
+    <Frame label="雪蟹與握壽司的插畫" tint="#FDECEF">
       <ellipse cx="60" cy="68" rx="46" ry="12" fill={C.white} opacity="0.9" />
       <Crabby x={44} y={44} s={1.25} body="#F4A28C" shell={C.red} />
       <Nigiri x={88} y={58} s={0.95} topping={C.coral} />
@@ -68,7 +68,7 @@ export function Crab() {
 /** 美登利：握壽司 + 鮭魚卵軍艦 */
 export function Sushi() {
   return (
-    <Frame label="握壽司與鮭魚卵軍艦卷的插畫" tint="#F7ECE0">
+    <Frame label="握壽司與鮭魚卵軍艦卷的插畫" tint="#FBEFEA">
       {/* 木盤 */}
       <rect x="12" y="50" width="96" height="22" rx="5" fill={C.brown} />
       <rect x="16" y="52" width="88" height="16" rx="4" fill="#E4C79C" />
@@ -101,7 +101,7 @@ export function Sushi() {
 /** 牛舌定食 + 檸檬 */
 export function Gyutan() {
   return (
-    <Frame label="厚切牛舌定食與檸檬片的插畫" tint="#F6EDE2">
+    <Frame label="厚切牛舌定食與檸檬片的插畫" tint="#FAEFE9">
       {/* 鐵盤 */}
       <ellipse cx="52" cy="56" rx="34" ry="14" fill={C.ink} opacity="0.75" />
       <ellipse cx="52" cy="54" rx="31" ry="12" fill="#5C5048" />
@@ -144,7 +144,7 @@ export function Gyutan() {
 /** 魚真：刺身盛合 + 小螃蟹 */
 export function Sashimi() {
   return (
-    <Frame label="刺身盛合、鮪魚與小螃蟹的插畫" tint="#E8F0F4">
+    <Frame label="刺身盛合、鮪魚與小螃蟹的插畫" tint="#F3EFF4">
       {/* 船形盤 */}
       <path d="M12 54 C12 48 20 46 30 46 L94 46 C104 46 110 50 108 56 C106 64 96 68 84 68 L36 68 C22 68 12 62 12 54 Z" fill={C.brown} />
       <path d="M18 53 C18 50 24 49 32 49 L92 49 C99 49 103 51 102 55 C100 61 92 64 82 64 L38 64 C26 64 18 59 18 53 Z" fill="#EFE2CE" />
@@ -174,7 +174,7 @@ export function Sashimi() {
 /** 蟹道樂：紅螃蟹 + 蟹鍋 */
 export function CrabHotpot() {
   return (
-    <Frame label="紅色螃蟹與蟹肉火鍋的插畫" tint="#FAE6E2">
+    <Frame label="紅色螃蟹與蟹肉火鍋的插畫" tint="#FCE9EC">
       {/* 蒸氣 */}
       <g stroke={C.white} strokeWidth="2.4" strokeLinecap="round" opacity="0.9" fill="none">
         <path d="M50 26 c4 -5 -4 -8 0 -13" />

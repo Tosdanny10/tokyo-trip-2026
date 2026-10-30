@@ -4,71 +4,89 @@ import type { ReserveStatus, TransitMode } from '../data/types';
 
 /** 預約狀態的顯示設定 */
 export const reserveMeta: Record<ReserveStatus, { label: string; cls: string }> = {
-  none: { label: '未預約', cls: 'bg-stone-100 text-stone-600 ring-stone-300 dark:bg-stone-700/60 dark:text-stone-200 dark:ring-stone-500' },
-  booked: { label: '已預約', cls: 'bg-sage/35 text-sageDeep ring-sage dark:bg-sageDeep/40 dark:text-sage dark:ring-sageDeep' },
-  queue: { label: '需候位', cls: 'bg-ginkgo/35 text-ginkgoDeep ring-ginkgo dark:bg-ginkgoDeep/35 dark:text-ginkgo dark:ring-ginkgoDeep' },
-  tbc: { label: '待確認', cls: 'bg-sky/35 text-skyDeep ring-sky dark:bg-skyDeep/35 dark:text-sky dark:ring-skyDeep' },
+  none: {
+    label: '未預約',
+    cls: 'bg-paper text-inkSoft ring-line dark:bg-stone-700/60 dark:text-stone-200 dark:ring-stone-500',
+  },
+  booked: {
+    label: '已預約',
+    cls: 'bg-sage/40 text-sageDeep ring-sage dark:bg-sageDeep/40 dark:text-sage dark:ring-sageDeep',
+  },
+  queue: {
+    label: '需候位',
+    cls: 'bg-ginkgo/40 text-ginkgoDeep ring-ginkgo dark:bg-ginkgoDeep/35 dark:text-ginkgo dark:ring-ginkgoDeep',
+  },
+  tbc: {
+    label: '待確認',
+    cls: 'bg-sky/40 text-skyDeep ring-sky dark:bg-skyDeep/35 dark:text-sky dark:ring-skyDeep',
+  },
 };
 
-/** 交通方式的顯示設定（顏色依規格：JR 綠、Metro 淺藍、步行米白、計程車淡黃、機場交通粉藍） */
+/**
+ * 交通方式的顯示設定。
+ * 外框與連接線統一是粉色系，卡片本身保留各運具的辨識色：
+ * 步行＝淡粉米白／JR＝鼠尾草綠／Metro＝淡藍／計程車＝淡銀杏黃／
+ * Skyliner＝柔和藍紫／飛機＝淡天空藍。
+ * 文字色都挑過，在各自底色上達 WCAG AA。
+ */
 export const transitMeta: Record<
   TransitMode,
   { label: string; bg: string; border: string; text: string; dot: string }
 > = {
   walk: {
     label: '步行',
-    bg: 'bg-[#FFF6E6] dark:bg-stone-700/50',
-    border: 'border-[#E8D9BE] dark:border-stone-600',
-    text: 'text-[#8A7458] dark:text-stone-200',
-    dot: 'bg-[#D8C3A0]',
-  },
-  jr: {
-    label: 'JR',
-    bg: 'bg-[#E7F2E8] dark:bg-emerald-900/30',
-    border: 'border-[#BBD9BF] dark:border-emerald-700',
-    text: 'text-[#4E7D57] dark:text-emerald-200',
-    dot: 'bg-[#6E9B78]',
-  },
-  metro: {
-    label: '東京 Metro',
-    bg: 'bg-[#E6F2F9] dark:bg-sky-900/30',
-    border: 'border-[#B4D9EA] dark:border-sky-700',
-    text: 'text-[#3E7795] dark:text-sky-200',
-    dot: 'bg-[#6FA8C8]',
-  },
-  taxi: {
-    label: '計程車',
-    bg: 'bg-[#FDF3D7] dark:bg-amber-900/30',
-    border: 'border-[#EDD79A] dark:border-amber-700',
-    text: 'text-[#9A7A1E] dark:text-amber-200',
-    dot: 'bg-[#E0B429]',
-  },
-  skyliner: {
-    label: '京成 Skyliner',
-    bg: 'bg-[#E8EEFB] dark:bg-indigo-900/30',
-    border: 'border-[#C0CEEE] dark:border-indigo-700',
-    text: 'text-[#4A5E95] dark:text-indigo-200',
-    dot: 'bg-[#7E92C8]',
-  },
-  flight: {
-    label: '飛機',
-    bg: 'bg-[#EDEAF8] dark:bg-violet-900/30',
-    border: 'border-[#CEC6EB] dark:border-violet-700',
-    text: 'text-[#5F539B] dark:text-violet-200',
-    dot: 'bg-[#8A7CC8]',
+    bg: 'bg-[#FFF4F7] dark:bg-stone-700/50',
+    border: 'border-[#F0DCE3] dark:border-stone-600',
+    text: 'text-[#8A5A6C] dark:text-stone-200',
+    dot: 'bg-[#E8C3CF]',
   },
   terminal: {
     label: '航廈內步行',
-    bg: 'bg-[#F3F1EC] dark:bg-stone-700/50',
-    border: 'border-[#DCD6CB] dark:border-stone-600',
-    text: 'text-[#7A6F60] dark:text-stone-200',
-    dot: 'bg-[#BCB2A3]',
+    bg: 'bg-[#FBF1F4] dark:bg-stone-700/50',
+    border: 'border-[#EDDCE3] dark:border-stone-600',
+    text: 'text-[#7E6873] dark:text-stone-200',
+    dot: 'bg-[#D9C4CC]',
+  },
+  jr: {
+    label: 'JR',
+    bg: 'bg-[#ECF3EE] dark:bg-emerald-900/30',
+    border: 'border-[#C9DFCF] dark:border-emerald-700',
+    text: 'text-[#4F6E5B] dark:text-emerald-200',
+    dot: 'bg-[#7FA68C]',
+  },
+  metro: {
+    label: '東京 Metro',
+    bg: 'bg-[#E9F2F8] dark:bg-sky-900/30',
+    border: 'border-[#C3DBEA] dark:border-sky-700',
+    text: 'text-[#44738F] dark:text-sky-200',
+    dot: 'bg-[#7FAAC6]',
+  },
+  taxi: {
+    label: '計程車',
+    bg: 'bg-[#FDF4DC] dark:bg-amber-900/30',
+    border: 'border-[#EEDCA6] dark:border-amber-700',
+    text: 'text-[#8A6710] dark:text-amber-200',
+    dot: 'bg-[#D9B544]',
+  },
+  skyliner: {
+    label: '京成 Skyliner',
+    bg: 'bg-[#EFEDFA] dark:bg-indigo-900/30',
+    border: 'border-[#D3CEEE] dark:border-indigo-700',
+    text: 'text-[#574C92] dark:text-indigo-200',
+    dot: 'bg-[#9A90CE]',
+  },
+  flight: {
+    label: '飛機',
+    bg: 'bg-[#E9F3FB] dark:bg-violet-900/30',
+    border: 'border-[#C8DFF1] dark:border-violet-700',
+    text: 'text-[#3F7296] dark:text-violet-200',
+    dot: 'bg-[#86B2D2]',
   },
 };
 
 export function Badge({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-medium ring-1 ${className}`}>
+    <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[12px] font-semibold ring-1 ${className}`}>
       {children}
     </span>
   );
@@ -77,8 +95,8 @@ export function Badge({ children, className = '' }: { children: ReactNode; class
 /** 小資訊欄位（標籤 + 內容） */
 export function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="flex gap-2 text-[13px] leading-relaxed">
-      <span className="w-[4.5rem] shrink-0 text-inkSoft dark:text-stone-400">{label}</span>
+    <div className="flex gap-2 text-[15px] leading-relaxed">
+      <span className="w-[4.75rem] shrink-0 text-inkSoft dark:text-stone-400">{label}</span>
       <span className="flex-1 text-ink dark:text-stone-100">{children}</span>
     </div>
   );
@@ -94,17 +112,20 @@ interface LinkButtonProps {
 /** 外部連結按鈕（手機也好點，最小高度 44px） */
 export function LinkButton({ href, children, icon, tone = 'ghost' }: LinkButtonProps) {
   const tones = {
-    primary: 'bg-skyDeep text-white hover:bg-[#5c93b2] active:bg-[#517f9b]',
-    sakura: 'bg-sakuraDeep text-white hover:bg-[#d8798f] active:bg-[#c96c82]',
+    // 玫瑰粉實心鈕：白字對比 4.8:1
+    primary: 'bg-roseDeep text-white hover:bg-rose active:bg-rosePress',
+    // 次要鈕做成描邊：玫瑰粉實心配白字只有 3.2:1，改成粉底深粉字 4.8:1
+    sakura:
+      'bg-card text-roseDeep ring-2 ring-rose hover:bg-sakura/25 active:bg-sakura/40 dark:bg-nightCard dark:text-sakura dark:ring-rose',
     ghost:
-      'bg-white text-ink ring-1 ring-stone-200 hover:bg-stone-50 active:bg-stone-100 dark:bg-nightCard dark:text-stone-100 dark:ring-stone-600 dark:hover:bg-stone-700',
+      'bg-card text-ink ring-1 ring-line hover:bg-paper active:bg-sakura/40 dark:bg-nightCard dark:text-stone-100 dark:ring-stone-600 dark:hover:bg-stone-700',
   } as const;
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-xl px-3 text-[13px] font-medium shadow-sm transition ${tones[tone]}`}
+      className={`inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 rounded-xl px-3 text-[15px] font-semibold shadow-sm transition ${tones[tone]}`}
     >
       {icon ?? <ExternalLink size={15} aria-hidden />}
       {children}
@@ -116,12 +137,12 @@ export function LinkButton({ href, children, icon, tone = 'ghost' }: LinkButtonP
 export function SectionTitle({ emoji, title, note }: { emoji: string; title: string; note?: string }) {
   return (
     <div className="mb-3 flex items-center gap-2">
-      <span className="grid h-9 w-9 place-items-center rounded-2xl bg-white text-lg shadow-sticker dark:bg-nightCard" aria-hidden>
+      <span className="grid h-9 w-9 place-items-center rounded-2xl bg-card text-lg shadow-sticker dark:bg-nightCard" aria-hidden>
         {emoji}
       </span>
       <div>
-        <h2 className="text-base font-bold tracking-wide text-ink dark:text-stone-50">{title}</h2>
-        {note && <p className="text-[11px] text-inkSoft dark:text-stone-400">{note}</p>}
+        <h2 className="text-[17px] font-bold tracking-wide text-ink dark:text-stone-50">{title}</h2>
+        {note && <p className="text-[12px] text-inkSoft dark:text-stone-400">{note}</p>}
       </div>
     </div>
   );

@@ -32,23 +32,8 @@ export type IllustrationKey =
 /** 預約狀態 */
 export type ReserveStatus = 'none' | 'booked' | 'queue' | 'tbc';
 
-/** 費用分類（預算模式用） */
-export type CostCategory = 'food' | 'ticket' | 'kimono' | 'transit' | 'shopping' | 'lodging' | 'flight';
-
 /** 交通方式 */
 export type TransitMode = 'walk' | 'jr' | 'metro' | 'taxi' | 'skyliner' | 'flight' | 'terminal';
-
-export interface Cost {
-  /** 日圓金額（估算值） */
-  jpy: number;
-  /** person：每人；group：兩人合計 */
-  basis: 'person' | 'group';
-  category: CostCategory;
-  /** 預算表上顯示的名稱，省略時使用行程名稱 */
-  label?: string;
-  /** 金額尚未確認 */
-  tbc?: boolean;
-}
 
 export interface PlaceItem {
   kind: 'place';
@@ -65,7 +50,6 @@ export interface PlaceItem {
   stay?: string;
   /** 參考價格（文字描述，可含區間） */
   priceText?: string;
-  cost?: Cost;
   reserve: ReserveStatus;
   reserveNote?: string;
   /** Google Maps 搜尋關鍵字（建議用日文原名以提高命中率） */
@@ -74,6 +58,12 @@ export interface PlaceItem {
   official?: string;
   /** 訂位 / 預約網址 */
   booking?: string;
+  /**
+   * Tabelog 搜尋關鍵字（只有餐廳會填）。
+   * Tabelog 擋自動存取，無法逐一核實各店的頁面網址，
+   * 因此提供官方的搜尋連結而不是自行猜測的店家頁網址。
+   */
+  tabelogQuery?: string;
   /** 注意事項 */
   notes?: string[];
   /** 整個行程項目尚待確認（時間、地點或營業狀況） */
@@ -100,7 +90,6 @@ export interface TransitItem {
   walkMin?: string;
   /** 參考票價文字 */
   fareText?: string;
-  cost?: Cost;
   /** Google Maps 導航起點關鍵字 */
   mapsFrom?: string;
   /** Google Maps 導航終點關鍵字 */
@@ -123,6 +112,8 @@ export interface Day {
   iso: string;
   weekdayEn: string;
   weekdayZh: string;
+  /** 日期按鈕上的兩字主題，例如「出發」「銀杏」 */
+  short: string;
   title: string;
   subtitle: string;
   /** 當天主題色（Tailwind class 片段） */
@@ -131,9 +122,24 @@ export interface Day {
 }
 
 export interface Hotel {
+  /** 中文名稱（畫面主要顯示） */
   name: string;
+  /** 英文名稱 */
+  nameEn: string;
+  /** 日文名稱（Google Maps 用這個命中率最高） */
+  nameJa: string;
   address: string;
   nearestStation: string;
+  /** 從車站步行到飯店的時間 */
+  stationWalk: string;
+  /** 入住日 YYYY-MM-DD */
+  checkIn: string;
+  /** 退房日 YYYY-MM-DD */
+  checkOut: string;
+  /** 人數 */
+  guests: number;
+  /** 房間數 */
+  rooms: number;
   note: string;
 }
 
@@ -142,7 +148,8 @@ export interface TripMeta {
   subtitle: string;
   dateRange: string;
   travelers: number;
-  /** 預設匯率：1 JPY = x TWD（手動維護，非即時匯率） */
-  defaultRate: number;
-  rateNote: string;
+  /** 旅伴名字，顯示在標題前面 */
+  owners: string;
+  /** 完整標題（含旅伴名字） */
+  fullTitle: string;
 }

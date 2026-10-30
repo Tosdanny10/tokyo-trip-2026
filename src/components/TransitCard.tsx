@@ -49,7 +49,7 @@ export function TransitCard({ item }: { item: TransitItem }) {
     <div className="relative mx-auto w-full max-w-[34rem] px-1">
       {/* 虛線連接 */}
       <div className="flex justify-center" aria-hidden>
-        <div className={`h-4 w-0 border-l-2 border-dashed ${m.border.replace('border-', 'border-')}`} />
+        <div className="h-4 w-0 border-l-2 border-dashed border-sakura" />
       </div>
 
       <div className={`rounded-2xl border ${m.border} ${m.bg} px-3 py-2.5 shadow-sm`}>
@@ -60,35 +60,35 @@ export function TransitCard({ item }: { item: TransitItem }) {
 
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <span className={`text-[12px] font-bold ${m.text}`}>{m.label}</span>
-              {item.time && <span className="text-[11px] tabular-nums text-inkSoft dark:text-stone-400">{item.time}</span>}
+              <span className={`text-[13px] font-bold ${m.text}`}>{m.label}</span>
+              {item.time && <span className="text-[12px] tabular-nums text-inkSoft dark:text-stone-400">{item.time}</span>}
               {item.tbc && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-2 py-0.5 text-[10px] font-semibold text-coral ring-1 ring-coral/40 dark:bg-stone-800/70">
+                <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-2 py-0.5 text-[11px] font-semibold text-coral ring-1 ring-coral/40 dark:bg-stone-800/70">
                   <AlertTriangle size={11} aria-hidden />
                   待確認
                 </span>
               )}
             </div>
 
-            <p className={`mt-1 text-[13px] font-semibold leading-snug ${m.text}`}>
+            <p className={`mt-1 text-[15px] font-semibold leading-snug ${m.text}`}>
               {r(item.from)} <span aria-hidden className="opacity-60">→</span> {r(item.to)}
             </p>
 
-            <p className="mt-0.5 text-[12px] leading-relaxed text-ink/80 dark:text-stone-300">{r(item.recommend)}</p>
+            <p className="mt-0.5 text-[13px] leading-relaxed text-ink/80 dark:text-stone-300">{r(item.recommend)}</p>
 
             <div className="mt-1.5 flex flex-wrap gap-1.5">
               {item.rideMin && (
-                <span className="rounded-full bg-white/80 px-2 py-0.5 text-[11px] text-inkSoft ring-1 ring-black/5 dark:bg-stone-800/70 dark:text-stone-300">
+                <span className="rounded-full bg-white/80 px-2 py-0.5 text-[12px] text-inkSoft ring-1 ring-black/5 dark:bg-stone-800/70 dark:text-stone-300">
                   🚆 {item.rideMin}
                 </span>
               )}
               {item.walkMin && (
-                <span className="rounded-full bg-white/80 px-2 py-0.5 text-[11px] text-inkSoft ring-1 ring-black/5 dark:bg-stone-800/70 dark:text-stone-300">
+                <span className="rounded-full bg-white/80 px-2 py-0.5 text-[12px] text-inkSoft ring-1 ring-black/5 dark:bg-stone-800/70 dark:text-stone-300">
                   🚶 {item.walkMin}
                 </span>
               )}
               {item.fareText && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-2 py-0.5 text-[11px] text-inkSoft ring-1 ring-black/5 dark:bg-stone-800/70 dark:text-stone-300">
+                <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-2 py-0.5 text-[12px] text-inkSoft ring-1 ring-black/5 dark:bg-stone-800/70 dark:text-stone-300">
                   <Coins size={11} aria-hidden />
                   {item.fareText}
                 </span>
@@ -96,7 +96,7 @@ export function TransitCard({ item }: { item: TransitItem }) {
             </div>
 
             {note && (
-              <p className="mt-1.5 rounded-xl bg-white/70 px-2.5 py-1.5 text-[12px] leading-relaxed text-ink dark:bg-stone-800/60 dark:text-stone-200">
+              <p className="mt-1.5 rounded-xl bg-white/70 px-2.5 py-1.5 text-[13px] leading-relaxed text-ink dark:bg-stone-800/60 dark:text-stone-200">
                 📝 {note}
               </p>
             )}
@@ -107,7 +107,7 @@ export function TransitCard({ item }: { item: TransitItem }) {
                   href={dirHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-[40px] items-center gap-1.5 rounded-xl bg-white px-3 text-[12px] font-semibold text-skyDeep shadow-sm ring-1 ring-black/5 transition hover:bg-stone-50 dark:bg-stone-800 dark:text-sky dark:hover:bg-stone-700"
+                  className="inline-flex min-h-[40px] items-center gap-1.5 rounded-xl bg-card px-3 text-[13px] font-semibold text-roseDeep shadow-sm ring-1 ring-black/5 transition hover:bg-paper dark:bg-stone-800 dark:text-sky dark:hover:bg-stone-700"
                 >
                   <Navigation size={14} aria-hidden />
                   開啟 Google Maps 導航
@@ -116,7 +116,7 @@ export function TransitCard({ item }: { item: TransitItem }) {
               <button
                 type="button"
                 onClick={() => setEditing((v) => !v)}
-                className="inline-flex min-h-[40px] items-center gap-1 rounded-xl px-2.5 text-[12px] font-medium text-inkSoft transition hover:bg-white/70 dark:text-stone-300 dark:hover:bg-stone-800/60"
+                className="inline-flex min-h-[40px] items-center gap-1 rounded-xl px-2.5 text-[13px] font-medium text-inkSoft transition hover:bg-white/70 dark:text-stone-300 dark:hover:bg-stone-800/60"
               >
                 <Pencil size={13} aria-hidden />
                 {note ? '修改備註' : '加備註／改時間'}
@@ -127,7 +127,7 @@ export function TransitCard({ item }: { item: TransitItem }) {
                   onClick={() => setOpen((v) => !v)}
                   aria-expanded={open}
                   aria-controls={panelId}
-                  className="inline-flex min-h-[40px] items-center gap-1 rounded-xl px-2.5 text-[12px] font-medium text-inkSoft transition hover:bg-white/70 dark:text-stone-300 dark:hover:bg-stone-800/60"
+                  className="inline-flex min-h-[40px] items-center gap-1 rounded-xl px-2.5 text-[13px] font-medium text-inkSoft transition hover:bg-white/70 dark:text-stone-300 dark:hover:bg-stone-800/60"
                 >
                   路線細節
                   <ChevronDown size={14} className={`transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden />
@@ -137,7 +137,7 @@ export function TransitCard({ item }: { item: TransitItem }) {
 
             {editing && (
               <div className="mt-2">
-                <label htmlFor={noteId} className="mb-1 block text-[11px] text-inkSoft dark:text-stone-400">
+                <label htmlFor={noteId} className="mb-1 block text-[12px] text-inkSoft dark:text-stone-400">
                   自行調整的交通時間或備註（只存在這台裝置）
                 </label>
                 <textarea
@@ -146,7 +146,7 @@ export function TransitCard({ item }: { item: TransitItem }) {
                   onChange={(e) => setTransitNote(item.id, e.target.value)}
                   rows={2}
                   placeholder="例：實測 22 分鐘／改搭特別快速"
-                  className="w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-[13px] text-ink outline-none focus:ring-2 focus:ring-skyDeep/40 dark:border-stone-600 dark:bg-stone-800 dark:text-stone-100"
+                  className="w-full rounded-xl border border-black/10 bg-card px-3 py-2 text-[15px] text-ink outline-none focus:ring-2 focus:ring-rose/50 dark:border-stone-600 dark:bg-stone-800 dark:text-stone-100"
                 />
               </div>
             )}
@@ -154,24 +154,24 @@ export function TransitCard({ item }: { item: TransitItem }) {
             {open && (
               <div id={panelId} className="animate-pop mt-2 space-y-1.5 rounded-xl bg-white/70 p-3 dark:bg-stone-800/60">
                 {item.line && (
-                  <p className="text-[12px] leading-relaxed text-ink dark:text-stone-200">
+                  <p className="text-[13px] leading-relaxed text-ink dark:text-stone-200">
                     <span className="text-inkSoft dark:text-stone-400">路線名稱：</span>
                     {r(item.line)}
                   </p>
                 )}
                 {item.stations && (
-                  <p className="text-[12px] leading-relaxed text-ink dark:text-stone-200">
+                  <p className="text-[13px] leading-relaxed text-ink dark:text-stone-200">
                     <span className="text-inkSoft dark:text-stone-400">起終點／轉乘：</span>
                     {r(item.stations)}
                   </p>
                 )}
                 {item.tbcReason && (
-                  <p className="flex gap-1.5 text-[12px] leading-relaxed text-coral">
+                  <p className="flex gap-1.5 text-[13px] leading-relaxed text-coral">
                     <AlertTriangle size={13} className="mt-0.5 shrink-0" aria-hidden />
                     <span>{r(item.tbcReason)}</span>
                   </p>
                 )}
-                <p className="text-[11px] text-inkSoft dark:text-stone-400">
+                <p className="text-[12px] text-inkSoft dark:text-stone-400">
                   所有時間與票價均為估算值，未經官方查詢核實，請在出發前以 Google Maps 或各鐵道公司官網確認。
                 </p>
               </div>
@@ -181,7 +181,7 @@ export function TransitCard({ item }: { item: TransitItem }) {
       </div>
 
       <div className="flex justify-center" aria-hidden>
-        <div className={`h-4 w-0 border-l-2 border-dashed ${m.border}`} />
+        <div className="h-4 w-0 border-l-2 border-dashed border-sakura" />
       </div>
     </div>
   );

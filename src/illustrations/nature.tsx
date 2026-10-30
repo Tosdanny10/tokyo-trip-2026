@@ -49,7 +49,7 @@ function KimonoPerson({
 /** VASARA 和服：兩位穿和服的旅人 */
 export function Kimono() {
   return (
-    <Frame label="兩位穿著和服的旅人插畫" tint="#F7E9EE">
+    <Frame label="兩位穿著和服的旅人插畫" tint="#FCE9F1">
       {/* 和紙背景圓 */}
       <circle cx="60" cy="40" r="30" fill={C.white} opacity="0.6" />
       <KimonoPerson x={42} y={44} s={1.05} robe={C.sakura} obi={C.sakuraDeep} bun />
@@ -69,7 +69,7 @@ export function Kimono() {
 /** 昭和紀念公園：銀杏大道 */
 export function Ginkgo() {
   return (
-    <Frame label="金黃色銀杏大道的插畫" tint="#FBF0D4">
+    <Frame label="金黃色銀杏大道的插畫" tint="#FDF2DF">
       {/* 地面與步道 */}
       <path d="M0 90 L44 50 H76 L120 90 Z" fill="#F2DFA8" />
       <path d="M14 90 L48 54 H72 L106 90 Z" fill="#E9D191" />
@@ -102,7 +102,7 @@ export function Ginkgo() {
 /** 根津神社：紅色千本鳥居 */
 export function Torii() {
   return (
-    <Frame label="紅色千本鳥居與石燈籠的插畫" tint="#F6E6E1">
+    <Frame label="紅色千本鳥居與石燈籠的插畫" tint="#FBEAE9">
       {/* 參道 */}
       <path d="M34 90 L48 34 H72 L86 90 Z" fill="#E3D3C2" />
       {/* 由遠到近的鳥居 */}
@@ -138,7 +138,7 @@ export function Torii() {
 /** 谷中銀座：日式老街與小貓 */
 export function YanakaCat() {
   return (
-    <Frame label="谷中老街、小貓與團子的插畫" tint="#F3EEE2">
+    <Frame label="谷中老街、小貓與團子的插畫" tint="#FAF0EC">
       {/* 房子 */}
       <g>
         <rect x="12" y="38" width="30" height="34" fill="#E8DCC6" />
@@ -191,7 +191,7 @@ export function YanakaCat() {
 /** 上野公園：不忍池與樹 */
 export function UenoPark() {
   return (
-    <Frame label="上野公園池畔與林蔭的插畫" tint="#E9F0E6">
+    <Frame label="上野公園池畔與林蔭的插畫" tint="#F3F0EE">
       {/* 池 */}
       <ellipse cx="60" cy="72" rx="52" ry="14" fill={C.sky} opacity="0.75" />
       <g stroke={C.white} strokeWidth="1.2" opacity="0.8" fill="none">

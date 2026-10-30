@@ -1,61 +1,45 @@
-import { Map, Wallet } from 'lucide-react';
-import { days } from '../data/itinerary';
+import { CalendarRange, Map, UtensilsCrossed, type LucideIcon } from 'lucide-react';
 import type { ViewMode } from '../App';
 
+const tabs: { id: ViewMode; label: string; Icon: LucideIcon }[] = [
+  { id: 'plan', label: '行程', Icon: CalendarRange },
+  { id: 'map', label: '地圖', Icon: Map },
+  { id: 'food', label: '美食', Icon: UtensilsCrossed },
+];
+
 /**
- * 手機底部固定導覽列：日期切換 + 預算模式。
- * 使用 env(safe-area-inset-bottom) 處理 iPhone 的安全區域。
+ * 手機底部固定導覽列。
+ * 半透明粉白毛玻璃 + 粉灰上邊框；選中的項目用淡粉膠囊底 + 玫瑰粉圖示，
+ * 未選中是暖灰紫。底部保留 iOS Home Indicator 的安全區域。
  */
-export function BottomNav({
-  activeDay,
-  onSelectDay,
-  mode,
-  onModeChange,
-}: {
-  activeDay: string;
-  onSelectDay: (id: string) => void;
-  mode: ViewMode;
-  onModeChange: (mode: ViewMode) => void;
-}) {
+export function BottomNav({ mode, onModeChange }: { mode: ViewMode; onModeChange: (mode: ViewMode) => void }) {
   return (
     <nav
-      aria-label="底部導覽"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-stone-200/80 bg-cream/95 backdrop-blur-md pb-[env(safe-area-inset-bottom)] md:hidden dark:border-stone-700 dark:bg-night/95"
+      aria-label="主要導覽"
+      className="pb-safe fixed inset-x-0 bottom-0 z-40 border-t border-line/90 bg-cream/85 backdrop-blur-xl md:hidden dark:border-stone-700 dark:bg-night/90"
     >
-      <div className="flex items-stretch gap-1 px-2 pt-1.5">
-        {days.map((day) => {
-          const active = mode === 'plan' && day.id === activeDay;
+      <ul className="flex items-stretch gap-1 px-2 pt-1.5">
+        {tabs.map(({ id, label, Icon }) => {
+          const active = mode === id;
           return (
-            <button
-              key={day.id}
-              type="button"
-              onClick={() => {
-                onModeChange('plan');
-                onSelectDay(day.id);
-              }}
-              aria-current={active ? 'true' : undefined}
-              className={`flex min-h-[52px] flex-1 flex-col items-center justify-center rounded-xl px-1 transition ${
-                active ? 'bg-sakura/30 text-ink dark:bg-sakuraDeep/30 dark:text-stone-50' : 'text-inkSoft dark:text-stone-400'
-              }`}
-            >
-              <span className="text-[15px] font-bold tabular-nums leading-none">{day.date}</span>
-              <span className="mt-0.5 text-[10px] leading-none">{day.weekdayZh}</span>
-            </button>
+            <li key={id} className="flex-1">
+              <button
+                type="button"
+                onClick={() => onModeChange(id)}
+                aria-current={active ? 'page' : undefined}
+                className={`flex min-h-[52px] w-full flex-col items-center justify-center gap-0.5 rounded-2xl transition ${
+                  active
+                    ? 'bg-sakura/35 text-rosePress dark:bg-rose/25 dark:text-sakura'
+                    : 'text-inkSoft hover:bg-paper/70 dark:text-stone-400'
+                }`}
+              >
+                <Icon size={20} className={active ? 'stroke-[2.4]' : ''} />
+                <span className={`text-[12px] leading-none ${active ? 'font-bold' : 'font-medium'}`}>{label}</span>
+              </button>
+            </li>
           );
         })}
-
-        <button
-          type="button"
-          onClick={() => onModeChange(mode === 'budget' ? 'plan' : 'budget')}
-          aria-pressed={mode === 'budget'}
-          className={`flex min-h-[52px] w-[60px] flex-col items-center justify-center rounded-xl transition ${
-            mode === 'budget' ? 'bg-ginkgo/35 text-ginkgoDeep' : 'text-inkSoft dark:text-stone-400'
-          }`}
-        >
-          {mode === 'budget' ? <Map size={18} aria-hidden /> : <Wallet size={18} aria-hidden />}
-          <span className="mt-0.5 text-[10px] leading-none">{mode === 'budget' ? '行程' : '預算'}</span>
-        </button>
-      </div>
+      </ul>
     </nav>
   );
 }

@@ -6,9 +6,9 @@ import { C, Cloud, GinkgoLeaf } from './base';
  */
 export function HeroScene() {
   return (
-    <svg viewBox="0 0 360 200" role="img" aria-label="東京秋日風景插畫：富士山、東京鐵塔、晴空塔、小飛機與銀杏葉" className="h-full w-full">
+    <svg viewBox="0 0 360 200" role="img" aria-label="東京秋日風景插畫：富士山、東京鐵塔、晴空塔、小飛機與銀杏葉" preserveAspectRatio="xMidYMid slice" className="h-full w-full">
       {/* 天空 */}
-      <rect width="360" height="200" rx="18" fill="#FDF3E3" />
+      <rect width="360" height="200" rx="18" fill="#FFF1F6" />
       <circle cx="292" cy="44" r="26" fill={C.ginkgo} opacity="0.55" />
       <circle cx="292" cy="44" r="18" fill={C.ginkgo} opacity="0.6" />
       <Cloud x={60} y={38} s={1.5} />
@@ -64,8 +64,8 @@ export function HeroScene() {
       </g>
 
       {/* 小飛機 + 虛線航跡 */}
-      <path d="M18 70 C70 46 120 50 168 34" fill="none" stroke={C.sakuraDeep} strokeWidth="2" strokeDasharray="5 6" strokeLinecap="round" opacity="0.85" />
-      <g transform="translate(176 32) rotate(-16)">
+      <path d="M18 88 C70 64 120 68 168 52" fill="none" stroke={C.sakuraDeep} strokeWidth="2" strokeDasharray="5 6" strokeLinecap="round" opacity="0.85" />
+      <g transform="translate(176 50) rotate(-16)">
         <path d="M-22 0 L16 -7 L28 0 L16 7 Z" fill={C.white} />
         <path d="M-5 0 L7 -19 L14 -17 L9 0 Z" fill={C.sakura} />
         <path d="M-5 0 L7 19 L14 17 L9 0 Z" fill={C.sakuraDeep} />

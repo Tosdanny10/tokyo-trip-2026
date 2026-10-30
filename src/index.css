@@ -5,10 +5,15 @@
 @layer base {
   :root {
     color-scheme: light;
+    /* 供非 Tailwind 的地方（body 背景、捲軸）使用的粉色 tokens */
+    --tt-bg: #fff8fa;
+    --tt-sakura: 244 175 196;
+    --tt-rose: 185 78 119;
   }
 
   html.dark {
     color-scheme: dark;
+    --tt-bg: #2a2126;
   }
 
   html {
@@ -17,23 +22,24 @@
 
   body {
     margin: 0;
-    /* 手帳紙張質感：細格線 + 柔和紙色 */
-    background-color: #fffbf2;
+    /* 奶油粉白底 + 極淡的櫻花暈染與手帳橫線 */
+    background-color: var(--tt-bg);
     background-image:
-      radial-gradient(circle at 18% 12%, rgba(243, 190, 203, 0.18), transparent 42%),
-      radial-gradient(circle at 82% 8%, rgba(246, 206, 106, 0.16), transparent 40%),
-      linear-gradient(rgba(74, 64, 56, 0.045) 1px, transparent 1px);
-    background-size: auto, auto, 100% 28px;
+      radial-gradient(circle at 16% 10%, rgba(244, 175, 196, 0.26), transparent 44%),
+      radial-gradient(circle at 86% 6%, rgba(244, 213, 126, 0.14), transparent 40%),
+      radial-gradient(circle at 50% 96%, rgba(244, 175, 196, 0.16), transparent 46%),
+      linear-gradient(rgba(185, 78, 119, 0.04) 1px, transparent 1px);
+    background-size: auto, auto, auto, 100% 28px;
+    background-attachment: fixed, fixed, fixed, scroll;
     font-family: 'Zen Maru Gothic', 'Noto Sans TC', 'Hiragino Maru Gothic ProN', ui-rounded, system-ui, sans-serif;
     /* 避免橫向捲動 */
     overflow-x: hidden;
   }
 
   html.dark body {
-    background-color: #2a2521;
     background-image:
-      radial-gradient(circle at 18% 12%, rgba(228, 137, 159, 0.12), transparent 42%),
-      radial-gradient(circle at 82% 8%, rgba(246, 206, 106, 0.1), transparent 40%),
+      radial-gradient(circle at 16% 10%, rgba(217, 107, 148, 0.16), transparent 44%),
+      radial-gradient(circle at 86% 6%, rgba(244, 213, 126, 0.08), transparent 40%),
       linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: auto, auto, 100% 28px;
   }
@@ -59,6 +65,43 @@
   /* 手機點擊回饋 */
   button,
   a {
-    -webkit-tap-highlight-color: rgba(228, 137, 159, 0.2);
+    -webkit-tap-highlight-color: rgba(217, 107, 148, 0.18);
+  }
+
+  /* 日文地名與長網址在窄螢幕上正常斷行，不撐破卡片 */
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  span,
+  a {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    line-break: strict;
+  }
+
+  /* iOS 表單元素不要被 Safari 套用預設外觀 */
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+  }
+
+  input,
+  textarea {
+    font-size: 16px; /* 低於 16px 時 iOS Safari 會自動放大畫面 */
+  }
+}
+
+@layer components {
+  /* 頂部安全區域（Dynamic Island / 瀏海） */
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
