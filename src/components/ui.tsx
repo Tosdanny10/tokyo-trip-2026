@@ -1,26 +1,6 @@
 import type { ReactNode } from 'react';
 import { ExternalLink } from 'lucide-react';
-import type { ReserveStatus, TransitMode } from '../data/types';
-
-/** 預約狀態的顯示設定 */
-export const reserveMeta: Record<ReserveStatus, { label: string; cls: string }> = {
-  none: {
-    label: '免預約',
-    cls: 'bg-paper text-inkSoft ring-line dark:bg-stone-700/60 dark:text-stone-200 dark:ring-stone-500',
-  },
-  booked: {
-    label: '已預約',
-    cls: 'bg-sage/40 text-sageDeep ring-sage dark:bg-sageDeep/40 dark:text-sage dark:ring-sageDeep',
-  },
-  queue: {
-    label: '需候位',
-    cls: 'bg-ginkgo/40 text-ginkgoDeep ring-ginkgo dark:bg-ginkgoDeep/35 dark:text-ginkgo dark:ring-ginkgoDeep',
-  },
-  tbc: {
-    label: '待確認',
-    cls: 'bg-sky/40 text-skyDeep ring-sky dark:bg-skyDeep/35 dark:text-sky dark:ring-skyDeep',
-  },
-};
+import type { TransitMode } from '../data/types';
 
 /**
  * 交通方式的顯示設定。

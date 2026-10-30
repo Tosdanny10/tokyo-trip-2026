@@ -29,9 +29,6 @@ export type IllustrationKey =
   | 'souvenir'
   | 'checkinCounter';
 
-/** 預約狀態 */
-export type ReserveStatus = 'none' | 'booked' | 'queue' | 'tbc';
-
 /** 交通方式 */
 export type TransitMode = 'walk' | 'jr' | 'metro' | 'taxi' | 'skyliner' | 'flight' | 'terminal';
 
@@ -50,8 +47,6 @@ export interface PlaceItem {
   stay?: string;
   /** 參考價格（文字描述，可含區間） */
   priceText?: string;
-  reserve: ReserveStatus;
-  reserveNote?: string;
   /** Google Maps 搜尋關鍵字（建議用日文原名以提高命中率） */
   mapQuery?: string;
   /** 官方網站 */

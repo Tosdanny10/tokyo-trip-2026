@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import type { Hotel, ReserveStatus } from '../data/types';
+import type { Hotel } from '../data/types';
 import { defaultHotel } from '../data/itinerary';
 
 const STORAGE_KEY = 'tokyo-trip-2026/v1';
@@ -18,10 +18,6 @@ export interface TripState {
   /** 資料版本，用來做欄位遷移 */
   version: number;
   hotel: Hotel;
-  /** 行程勾選狀態 */
-  checked: Record<string, boolean>;
-  /** 使用者覆寫的預約狀態 */
-  reserveOverride: Record<string, ReserveStatus>;
   /** 交通卡片的使用者備註 / 自行調整的時間 */
   transitNote: Record<string, string>;
 }
@@ -29,15 +25,11 @@ export interface TripState {
 const emptyState: TripState = {
   version: SCHEMA_VERSION,
   hotel: defaultHotel,
-  checked: {},
-  reserveOverride: {},
   transitNote: {},
 };
 
 interface TripContextValue extends TripState {
   setHotel: (patch: Partial<Hotel>) => void;
-  toggleChecked: (id: string) => void;
-  setReserve: (id: string, status: ReserveStatus | null) => void;
   setTransitNote: (id: string, note: string) => void;
   resetAll: () => void;
 }
@@ -59,8 +51,6 @@ function load(): TripState {
       ...parsed,
       version: SCHEMA_VERSION,
       hotel,
-      checked: parsed.checked ?? {},
-      reserveOverride: parsed.reserveOverride ?? {},
       transitNote: parsed.transitNote ?? {},
     };
   } catch {
@@ -83,19 +73,6 @@ export function TripProvider({ children }: { children: ReactNode }) {
     setState((s) => ({ ...s, hotel: { ...s.hotel, ...patch } }));
   }, []);
 
-  const toggleChecked = useCallback((id: string) => {
-    setState((s) => ({ ...s, checked: { ...s.checked, [id]: !s.checked[id] } }));
-  }, []);
-
-  const setReserve = useCallback((id: string, status: ReserveStatus | null) => {
-    setState((s) => {
-      const next = { ...s.reserveOverride };
-      if (status === null) delete next[id];
-      else next[id] = status;
-      return { ...s, reserveOverride: next };
-    });
-  }, []);
-
   const setTransitNote = useCallback((id: string, note: string) => {
     setState((s) => {
       const next = { ...s.transitNote };
@@ -108,8 +85,8 @@ export function TripProvider({ children }: { children: ReactNode }) {
   const resetAll = useCallback(() => setState(emptyState), []);
 
   const value = useMemo<TripContextValue>(
-    () => ({ ...state, setHotel, toggleChecked, setReserve, setTransitNote, resetAll }),
-    [state, setHotel, toggleChecked, setReserve, setTransitNote, resetAll],
+    () => ({ ...state, setHotel, setTransitNote, resetAll }),
+    [state, setHotel, setTransitNote, resetAll],
   );
 
   return <TripContext.Provider value={value}>{children}</TripContext.Provider>;

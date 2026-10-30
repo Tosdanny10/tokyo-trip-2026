@@ -9,7 +9,7 @@
 - **技術**：React 18 + TypeScript + Vite 5 + Tailwind CSS 3 + Lucide Icons
 - **插畫**：28 張原創 SVG 插畫（`src/illustrations/`），沒有使用任何受版權保護的圖片或 Google Maps 截圖
 - **地圖**：只使用 Google Maps 官方的 URL 參數（`https://www.google.com/maps/dir/?api=1&...`），不呼叫付費地圖 API
-- **隱私**：勾選狀態、預約狀態與住宿資料都只存在瀏覽器的 `localStorage`，不會上傳任何資料
+- **隱私**：住宿資料與交通備註只存在瀏覽器的 `localStorage`，不會上傳任何資料
 
 ![首頁](docs/screenshots/01-home.jpg)
 
@@ -66,9 +66,8 @@ npm run preview
 
 - 置頂（手機黏在畫面上方）的四天日期切換：11/6 出發、11/7 銀杏、11/8 澀谷、11/9 神社
 - 點日期平滑捲動，不重新載入頁面；「只看今天」／「全部顯示」兩種檢視
-- 景點卡片：時間、中文名稱、日文原名、專屬插畫、簡介、地址、停留時間、參考價格、預約狀態、Google Maps、官方網站、訂位連結
+- 景點卡片：時間、中文名稱、日文原名、專屬插畫；點一下展開看簡介、地址、停留時間、參考價格、Google Maps、官方網站、訂位頁面
 - 每兩張景點卡片之間都有一張**交通卡片**：起點、終點、運具圖示與顏色、推薦路線、路線名稱、起終點與轉乘站、月台、預估搭乘／步行時間、票價、Google Maps 導航
-- 預約狀態可切換：未預約／已預約／需候位／待確認；每個行程可勾選「已完成」
 - 交通卡片可自行加備註或修改時間
 - 頁尾有「住宿設定」，可直接改飯店名稱與地址
 
@@ -78,7 +77,7 @@ npm run preview
 
 ### 美食
 
-這趟的 5 家餐廳集中一頁（皆已訂位），含價位、地址、訂位頁面與 Tabelog 搜尋。
+這趟的 5 家餐廳集中一頁，含價位、地址、訂位頁面與 Tabelog 搜尋。
 
 ### 手機體驗
 
@@ -148,7 +147,6 @@ export const days: Day[] = [
         address: '東京都立川市柴崎町 3-1-7 立川南口第2ビル 5F',
         stay: '約 90 分鐘',
         priceText: '……',
-        reserve: 'none',      // none | booked | queue | tbc
         mapQuery: '立川 蟹最上',
         booking: 'https://...',
         official: 'https://...',
@@ -177,7 +175,6 @@ export const days: Day[] = [
 | 欄位 | 說明 |
 | --- | --- |
 | `short` | 日期按鈕上的兩字主題 |
-| `reserve` | `none` 未預約／`booked` 已預約／`queue` 需候位／`tbc` 待確認 |
 | `tabelogQuery` | 有填的景點會被當成餐廳，出現在「美食」分頁 |
 | `tbc` + `tbcReason` | 交通卡片顯示紅色「待確認」標籤與原因 |
 
@@ -228,7 +225,7 @@ export const defaultHotel: Hotel = {
 > 沒有可靠的即時交通資料來源，所以改完住宿後不會假裝已經重算過。
 > 請點交通卡片的「開啟 Google Maps 導航」自行確認，再用「加備註／改時間」記下實際結果。
 
-> 💡 住宿資料有版本控管（`SCHEMA_VERSION`）。改 `defaultHotel` 之後，把 `src/state/TripState.tsx` 的 `SCHEMA_VERSION` 加一，舊訪客的瀏覽器就會換成新飯店，但勾選與預約狀態都會保留。
+> 💡 住宿資料有版本控管（`SCHEMA_VERSION`）。改 `defaultHotel` 之後，把 `src/state/TripState.tsx` 的 `SCHEMA_VERSION` 加一，舊訪客的瀏覽器就會換成新飯店。
 
 ---
 
@@ -263,7 +260,7 @@ TypeScript 會確保 key 與註冊表一一對應，漏掉會在 `npm run build`
 
 已經部署好了：**https://tosdanny10.github.io/tokyo-trip-2026/**
 
-- Repository：`Tosdanny10/tokyo-trip-2026`（**private**，但 Pages 網站本身是公開可瀏覽的）
+- Repository：`Tosdanny10/tokyo-trip-2026`（public）
 - Pages 來源：GitHub Actions（`.github/workflows/deploy.yml`）
 
 之後只要改完 push 到 `main`，就會自動 `npm ci` → `npm run build` → 部署 `dist/`：
@@ -385,7 +382,7 @@ npm run build && mkdir -p .pages-test/tokyo-trip-2026 && cp -R dist/. .pages-tes
 │   │   └── types.ts               型別定義
 │   ├── illustrations/             原創 SVG 插畫
 │   ├── lib/format.ts              Google Maps / Tabelog URL、住宿樣板變數
-│   └── state/TripState.tsx        localStorage 狀態（勾選、預約、住宿、備註）
+│   └── state/TripState.tsx        localStorage 狀態（住宿、交通備註）
 ├── index.html
 ├── tailwind.config.js             ★ 粉色設計 tokens
 └── vite.config.ts
