@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    /* 手帳紙張質感：細格線 + 柔和紙色 */
+    background-color: #fffbf2;
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(243, 190, 203, 0.18), transparent 42%),
+      radial-gradient(circle at 82% 8%, rgba(246, 206, 106, 0.16), transparent 40%),
+      linear-gradient(rgba(74, 64, 56, 0.045) 1px, transparent 1px);
+    background-size: auto, auto, 100% 28px;
+    font-family: 'Zen Maru Gothic', 'Noto Sans TC', 'Hiragino Maru Gothic ProN', ui-rounded, system-ui, sans-serif;
+    /* 避免橫向捲動 */
+    overflow-x: hidden;
+  }
+
+  html.dark body {
+    background-color: #2a2521;
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(228, 137, 159, 0.12), transparent 42%),
+      radial-gradient(circle at 82% 8%, rgba(246, 206, 106, 0.1), transparent 40%),
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: auto, auto, 100% 28px;
+  }
+
+  /* 捲動時平滑定位，並尊重減少動態效果的設定 */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* 手機點擊回饋 */
+  button,
+  a {
+    -webkit-tap-highlight-color: rgba(228, 137, 159, 0.2);
+  }
+}

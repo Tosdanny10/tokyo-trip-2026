@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180" role="img" aria-label="Tokyo Trip 2026">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF7E8"/>
+      <stop offset="1" stop-color="#F3BECB"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="40" fill="url(#sky)"/>
+  <circle cx="126" cy="50" r="17" fill="#F2C14E" opacity="0.85"/>
+  <path d="M10 136 L58 86 L86 118 L112 88 L170 136 Z" fill="#9CBFA0"/>
+  <path d="M58 86 L86 118 L72 118 L44 102 Z" fill="#FFFFFF" opacity="0.65"/>
+  <path d="M112 88 L170 136 L126 136 L104 104 Z" fill="#6E9B78"/>
+  <g transform="translate(52 56) rotate(-18)">
+    <path d="M0 10 L30 2 L40 10 L30 18 Z" fill="#FFFFFF"/>
+    <path d="M14 10 L22 -6 L28 -4 L24 10 Z" fill="#E89AAC"/>
+    <path d="M14 10 L22 26 L28 24 L24 10 Z" fill="#E89AAC"/>
+    <circle cx="35" cy="10" r="3" fill="#A8CFE4"/>
+  </g>
+  <rect x="10" y="136" width="160" height="34" fill="#FFFBF2" opacity="0.0"/>
+</svg>
