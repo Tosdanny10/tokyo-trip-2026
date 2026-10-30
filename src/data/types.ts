@@ -27,7 +27,9 @@ export type IllustrationKey =
   | 'ameyoko'
   | 'skyliner'
   | 'souvenir'
-  | 'checkinCounter';
+  | 'checkinCounter'
+  | 'footSpa'
+  | 'illumination';
 
 /** 交通方式 */
 export type TransitMode = 'walk' | 'jr' | 'metro' | 'taxi' | 'skyliner' | 'flight' | 'terminal';

@@ -256,3 +256,88 @@ export function Ameyoko() {
     </Frame>
   );
 }
+
+/** 雙人足湯：木桶、兩雙腳、蒸氣與飲料 */
+export function FootSpa() {
+  return (
+    <Frame label="雙人足湯木桶、蒸氣與飲料的插畫" tint="#FBEBF0">
+      {/* 蒸氣 */}
+      <g stroke={C.white} strokeWidth="2.2" strokeLinecap="round" opacity="0.95" fill="none">
+        <path d="M44 30 c4 -5 -4 -8 0 -13" />
+        <path d="M60 26 c4 -5 -4 -8 0 -13" />
+        <path d="M76 30 c4 -5 -4 -8 0 -13" />
+      </g>
+      {/* 兩雙小腿與腳 */}
+      <g>
+        <rect x="40" y="34" width="9" height="20" rx="4.5" fill="#F7DDC8" />
+        <rect x="52" y="34" width="9" height="20" rx="4.5" fill="#F7DDC8" />
+        <rect x="64" y="34" width="9" height="20" rx="4.5" fill="#F3D2C0" />
+        <rect x="76" y="34" width="9" height="20" rx="4.5" fill="#F3D2C0" />
+      </g>
+      {/* 木桶 */}
+      <path d="M30 50 h66 l-5 22 a7 7 0 0 1 -7 6 h-42 a7 7 0 0 1 -7 -6 Z" fill={C.brown} />
+      <rect x="27" y="46" width="72" height="7" rx="3.5" fill="#A97F65" />
+      <path d="M33 53 h60 l-1.5 7 h-57 Z" fill={C.sky} opacity="0.85" />
+      {/* 水面小花瓣 */}
+      <g fill={C.sakuraDeep} opacity="0.85">
+        <circle cx="46" cy="56" r="2" />
+        <circle cx="63" cy="57" r="1.6" />
+        <circle cx="80" cy="56" r="2" />
+      </g>
+      {/* 木桶箍環 */}
+      <path d="M31 62 h64" stroke="#8E6B54" strokeWidth="2" opacity="0.6" />
+      {/* 兩杯飲料 */}
+      <g transform="translate(14 60)">
+        <path d="M-5 -6 h10 l-1.5 14 h-7 Z" fill={C.white} />
+        <rect x="-5.6" y="-8" width="11.2" height="3" rx="1.5" fill={C.sakura} />
+      </g>
+      <g transform="translate(106 60)">
+        <path d="M-5 -6 h10 l-1.5 14 h-7 Z" fill={C.white} />
+        <rect x="-5.6" y="-8" width="11.2" height="3" rx="1.5" fill={C.sage} />
+      </g>
+    </Frame>
+  );
+}
+
+/** 六本木櫸木坂燈海：藍白燈海大道與遠方東京鐵塔 */
+export function Illumination() {
+  return (
+    <Frame label="藍白色燈海大道與遠方東京鐵塔的插畫" tint="#E9E7F4">
+      <Moon x={18} y={16} s={0.85} />
+      <Stars points={[[34, 12, 1], [48, 20, 0.9], [92, 12, 1]]} />
+      {/* 遠方東京鐵塔 */}
+      <g transform="translate(60 0)">
+        <path d="M-9 60 L-2 26 h4 L9 60 Z" fill="none" stroke={C.coral} strokeWidth="2" />
+        <path d="M-6 46 h12 M-4 37 h8" stroke={C.coral} strokeWidth="1.6" />
+        <path d="M-9 60 h18" stroke={C.coral} strokeWidth="2" />
+        <path d="M0 26 V18" stroke={C.coral} strokeWidth="1.6" />
+        <circle cx="0" cy="16" r="2" fill={C.ginkgo} />
+      </g>
+      {/* 大道：由遠而近的透視 */}
+      <path d="M0 90 L46 60 H74 L120 90 Z" fill="#CFC8E4" />
+      <path d="M14 90 L50 62 H70 L106 90 Z" fill="#BDB5D8" />
+      {/* 兩側發光的行道樹 */}
+      {[
+        { x: 40, y: 60, s: 1 },
+        { x: 80, y: 60, s: 1 },
+        { x: 30, y: 70, s: 1.25 },
+        { x: 90, y: 70, s: 1.25 },
+        { x: 18, y: 82, s: 1.5 },
+        { x: 102, y: 82, s: 1.5 },
+      ].map(({ x, y, s }, i) => (
+        <g key={i} transform={`translate(${x} ${y}) scale(${s})`}>
+          <rect x="-1.2" y="0" width="2.4" height="9" fill="#6E6690" />
+          <circle cx="0" cy="-4" r="7" fill={C.sky} opacity="0.9" />
+          <circle cx="0" cy="-4" r="4" fill={C.white} opacity="0.85" />
+        </g>
+      ))}
+      {/* 路面光點 */}
+      <g fill={C.white} opacity="0.75">
+        <circle cx="56" cy="70" r="1.2" />
+        <circle cx="66" cy="76" r="1.4" />
+        <circle cx="48" cy="82" r="1.6" />
+        <circle cx="74" cy="86" r="1.6" />
+      </g>
+    </Frame>
+  );
+}

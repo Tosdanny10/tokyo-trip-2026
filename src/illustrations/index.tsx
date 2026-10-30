@@ -14,7 +14,7 @@ import {
   Taxi,
 } from './travel';
 import { Crab, CrabHotpot, Gyutan, Sashimi, Sushi } from './food';
-import { Ameyoko, Hachiko, NeonNight, Parco, RooftopPark, Shibuya109, StreetShopping } from './city';
+import { Ameyoko, FootSpa, Hachiko, Illumination, NeonNight, Parco, RooftopPark, Shibuya109, StreetShopping } from './city';
 import { Ginkgo, Kimono, Torii, UenoPark, YanakaCat } from './nature';
 
 /** 插畫註冊表：key 與 IllustrationKey 一一對應（TypeScript 會檢查缺漏） */
@@ -47,6 +47,8 @@ export const illustrations: Record<IllustrationKey, ComponentType> = {
   skyliner: Skyliner,
   souvenir: Souvenir,
   checkinCounter: CheckinCounter,
+  footSpa: FootSpa,
+  illumination: Illumination,
 };
 
 export function Illustration({ name }: { name: IllustrationKey }) {
