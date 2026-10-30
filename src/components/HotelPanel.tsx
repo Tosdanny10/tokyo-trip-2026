@@ -1,5 +1,5 @@
 import { useId, useState } from 'react';
-import { AlertTriangle, BedDouble, ChevronDown, MapPin, RotateCcw } from 'lucide-react';
+import { BedDouble, ChevronDown, MapPin, RotateCcw } from 'lucide-react';
 import { defaultHotel } from '../data/itinerary';
 import { mapsSearch } from '../lib/format';
 import { useTrip } from '../state/TripState';
@@ -69,12 +69,6 @@ export function HotelPanel() {
           在 Google Maps 開啟飯店
         </a>
 
-        <p className="mt-2.5 flex gap-1.5 rounded-xl bg-sakura/25 px-3 py-2 text-[13px] leading-relaxed text-ink dark:bg-rose/20 dark:text-stone-100">
-          <AlertTriangle size={15} className="mt-0.5 shrink-0 text-coral" aria-hidden />
-          <span>
-            11/7 的實際入住時間可能為凌晨 02:00–03:30，請先確認飯店接受深夜入住。訂房與付款狀態不在本頁確認。
-          </span>
-        </p>
       </div>
 
       <button

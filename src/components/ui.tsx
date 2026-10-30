@@ -5,7 +5,7 @@ import type { ReserveStatus, TransitMode } from '../data/types';
 /** 預約狀態的顯示設定 */
 export const reserveMeta: Record<ReserveStatus, { label: string; cls: string }> = {
   none: {
-    label: '未預約',
+    label: '免預約',
     cls: 'bg-paper text-inkSoft ring-line dark:bg-stone-700/60 dark:text-stone-200 dark:ring-stone-500',
   },
   booked: {

@@ -66,8 +66,6 @@ export interface PlaceItem {
   tabelogQuery?: string;
   /** 注意事項 */
   notes?: string[];
-  /** 整個行程項目尚待確認（時間、地點或營業狀況） */
-  tbc?: boolean;
 }
 
 export interface TransitItem {
@@ -96,10 +94,8 @@ export interface TransitItem {
   mapsTo?: string;
   /** Google Maps travelmode 參數 */
   travelmode: 'walking' | 'transit' | 'driving';
-  /** 待確認（例如依住宿地點或實際班次而定） */
-  tbc?: boolean;
-  /** 待確認的原因 */
-  tbcReason?: string;
+  /** 官方網站（例如鐵道公司的時刻表） */
+  official?: string;
 }
 
 export type ItineraryItem = PlaceItem | TransitItem;

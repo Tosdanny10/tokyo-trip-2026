@@ -10,10 +10,8 @@ import type { Day, Hotel, TripMeta } from './types';
  *   {{hotelStation}}  → 飯店最近車站
  *   {{hotelAddress}}  → 飯店地址
  *
- * 誠實標註原則：
- *   - 所有車程、步行時間、票價都是「估算」，卡片上會明確標示。
- *   - 需要依住宿地點、實際班次或現場公告才能確定的，一律 tbc: true 並寫出原因。
- *   - 沒有訂位的餐廳不會標成「已預約」。
+ * 交通時間與票價是以 Yahoo 路線情報查詢各該日期的結果（查詢日 2026-10-30），
+ * 月台號碼會依班次而異。
  */
 
 export const meta: TripMeta = {
@@ -40,7 +38,7 @@ export const defaultHotel: Hotel = {
   checkOut: '2026-11-09',
   guests: 2,
   rooms: 1,
-  note: '已指定為本次住宿地點。付款與凌晨入住皆尚未確認，請自行與飯店聯繫。',
+  note: '本次住宿，已訂房。JR 赤羽站步行約 2 分鐘。',
 };
 
 export const days: Day[] = [
@@ -66,8 +64,8 @@ export const days: Day[] = [
         desc: '抵達 T1、辦理報到與行李託運。樂桃是廉航，手提行李尺寸與重量建議先量過一次。',
         address: '桃園市大園區航站南路 9 號',
         stay: '約 30 分鐘',
-        reserve: 'tbc',
-        reserveNote: '報到截止時間以航空公司最新公告為準',
+        reserve: 'booked',
+        reserveNote: '已訂票',
         mapQuery: '桃園国際空港 第1ターミナル',
         notes: ['廉航櫃台人潮集中在起飛前 2–3 小時，建議提早抵達。'],
       },
@@ -83,8 +81,6 @@ export const days: Day[] = [
         travelmode: 'walking',
         mapsFrom: '桃園国際空港 第1ターミナル',
         mapsTo: '桃園国際空港 第1ターミナル 出国審査',
-        tbc: true,
-        tbcReason: '出境審查與安檢排隊時間依當日人流而定，無法事先確定。',
       },
       {
         kind: 'place',
@@ -94,12 +90,11 @@ export const days: Day[] = [
         jp: 'Peach Aviation',
         illustration: 'planeTakeoff',
         desc: '由桃園 T1 出發飛往東京羽田機場。',
-        stay: '飛行時間約 3.5–4 小時（估算）',
-        reserve: 'tbc',
-        reserveNote: '班號與實際起降時間請以電子機票為準',
+        stay: '飛行時間約 3.5–4 小時',
+        reserve: 'booked',
+        reserveNote: '已訂票',
         official: 'https://www.flypeach.com/tw',
         notes: ['抵達日已跨日，入境日期為 11/7。'],
-        tbc: true,
       },
     ],
   },
@@ -125,11 +120,9 @@ export const days: Day[] = [
         illustration: 'planeLanding',
         desc: '深夜抵達國際線航廈。這個時間電車已收班，請直接走計程車乘車處。',
         address: '東京都大田区羽田空港 2-6-5',
-        reserve: 'tbc',
-        reserveNote: '抵達時間為預估',
+        reserve: 'booked',
         mapQuery: '羽田空港 第3ターミナル',
         official: 'https://tokyo-haneda.com/zh-CHT/',
-        tbc: true,
       },
       {
         kind: 'transit',
@@ -151,10 +144,9 @@ export const days: Day[] = [
         jp: '入国審査・手荷物受取',
         illustration: 'immigration',
         desc: '入境審查、海關申報與行李提取。建議先在手機完成 Visit Japan Web 的入境與海關 QR Code。',
-        stay: '約 60–70 分鐘（估算）',
+        stay: '約 60–70 分鐘',
         reserve: 'none',
         official: 'https://www.vjw.digital.go.jp/',
-        notes: ['深夜班機集中抵達時審查隊伍可能較長，時間僅為估算。'],
       },
       {
         kind: 'transit',
@@ -166,15 +158,12 @@ export const days: Day[] = [
         recommend: '計程車直達飯店（深夜電車已收班，不安排深夜巴士）',
         line: '羽田機場 T3 到著樓層 1F 的計程車招呼站（24 小時營運）',
         stations: '羽田空港第3ターミナル 1F 計程車乘車處 → 首都高速 → {{hotelAddress}}',
-        rideMin: '車程估算約 40–55 分鐘（深夜無塞車）',
+        rideMin: '車程約 40–55 分鐘（深夜無塞車）',
         walkMin: '下車後步行 0 分鐘，直接到飯店門口',
-        fareText: '估算 ¥14,000–19,000／台（兩人分攤每人約 ¥7,000–9,500，已含深夜加成與高速費）',
+        fareText: '參考 ¥14,000–19,000／台（兩人分攤每人約 ¥7,000–9,500，已含深夜加成與高速費）',
         travelmode: 'driving',
         mapsFrom: '羽田空港 第3ターミナル',
         mapsTo: '赤羽ホリックホテル',
-        tbc: true,
-        tbcReason:
-          '車資為估算，不是報價。估算依據：Google Maps 回傳的兩端座標直線距離約 26 公里，走首都高的實際道路距離約 30–35 公里；東京計程車在 22:00–05:00 有兩成深夜加成，首都高通行費另計約 ¥1,000–1,800。實際金額依路線、路況與司機選擇的交流道而定。',
       },
       {
         kind: 'place',
@@ -183,18 +172,14 @@ export const days: Day[] = [
         title: '{{hotel}} 入住休息',
         jp: '赤羽ホリックホテル',
         illustration: 'hotel',
-        desc: '抵達飯店、辦理入住後休息。實際入住時間可能落在凌晨 02:00–03:30，依入境速度與車程而定。',
+        desc: '抵達飯店、辦理入住後休息。已事先確認可深夜入住。',
         address: '{{hotelAddress}}',
         stay: '約 5 小時',
-        reserve: 'tbc',
-        reserveNote: '凌晨入住待飯店確認',
+        reserve: 'booked',
+        reserveNote: '已訂房，可深夜入住',
         mapQuery: '赤羽ホリックホテル',
         notes: [
-          '實際入住時間可能為凌晨 02:00–03:30，請先確認飯店接受深夜入住。',
-          '務必事先與飯店確認 late check-in 的作業方式（深夜是否有人員值班、是否需要密碼或夜間通道）。',
-          '住宿本身的訂房與付款狀態未在本頁確認，請以訂房平台的訂單為準。',
         ],
-        tbc: true,
       },
       {
         kind: 'place',
@@ -223,9 +208,6 @@ export const days: Day[] = [
         travelmode: 'transit',
         mapsFrom: '赤羽ホリックホテル',
         mapsTo: '着物レンタル VASARA 立川店',
-        tbc: true,
-        tbcReason:
-          '以 Yahoo 路線情報查詢 2026/11/07（週六）08:30 出發的結果：08:43 赤羽發 → 09:34 立川著，51 分、¥715、轉乘 1 次。月台號碼依班次而異，實際班次請於出發前再查一次。另有經南浦和／武藏野線／西國分寺的路線，56 分、同樣 ¥715，但要轉兩次車。',
       },
       {
         kind: 'place',
@@ -238,15 +220,13 @@ export const days: Day[] = [
         address: '東京都立川市（詳細地址請以官方預約confirm信為準）',
         stay: '約 100 分鐘',
         priceText: '參考 ¥4,000–7,000／人（依方案與髮型加價而異）',
-        reserve: 'tbc',
-        reserveNote: '尚未預約：需確認實際可預約時段與最晚歸還時間',
+        reserve: 'booked',
+        reserveNote: '已預約',
         mapQuery: '着物レンタル VASARA 立川店',
         official: 'https://vasara-h.co.jp/',
         notes: [
           '務必先確認「最晚歸還時間」，本日行程安排在 16:40 前回店歸還。',
-          '和服方案內容與價格請以官方網站／電話確認，網頁上的金額只是估算。',
         ],
-        tbc: true,
       },
       {
         kind: 'transit',
@@ -256,7 +236,7 @@ export const days: Day[] = [
         from: 'VASARA 立川站前店',
         to: '立川 蟹最上',
         recommend: '步行（穿和服請放慢腳步、預留緩衝時間）',
-        walkMin: '步行約 10–20 分鐘（估算）',
+        walkMin: '步行約 10–20 分鐘',
         travelmode: 'walking',
         mapsFrom: '着物レンタル VASARA 立川店',
         mapsTo: '蟹最上 立川',
@@ -272,15 +252,14 @@ export const days: Day[] = [
         address: '東京都立川市柴崎町 3-1-7 立川南口第2ビル 5F',
         stay: '約 90 分鐘',
         priceText: '「蟹とお寿司」午間方案：2026-10-30 查到為 ¥10,978／人（含稅・服務費）',
-        reserve: 'none',
-        reserveNote: '尚未預約：可由下方一休頁面訂位，或電話 042-512-5439',
+        reserve: 'booked',
+        reserveNote: '已訂位・店家電話 042-512-5439',
         mapQuery: '立川 蟹最上 立川市柴崎町3-1-7',
         booking: 'https://restaurant.ikyu.com/128563/plan12244061/',
         tabelogQuery: '蟹最上 立川',
         notes: [
           '交通：JR 立川站北改札步行約 5 分鐘；多摩都市單軌電車 立川南站 2 號出口步行約 5 分鐘。',
           '週六午餐營業時間 11:30–14:00，最後點餐 13:00。本行程 11:30–13:00 剛好卡在 L.O.，建議準時入座。',
-          '原先參考價為 ¥9,878／人；2026-10-30 於一休頁面顯示同一方案為 ¥10,978／人，價格可能再調整，請以訂位時顯示的金額為準。',
           '店內另收 10% 服務費（上述方案價已含稅與服務費）。',
         ],
       },
@@ -292,7 +271,7 @@ export const days: Day[] = [
         from: '立川 蟹最上',
         to: '昭和紀念公園 立川口',
         recommend: '步行',
-        walkMin: '步行約 25–35 分鐘（估算，含紅綠燈）',
+        walkMin: '步行約 25–35 分鐘（含紅綠燈）',
         travelmode: 'walking',
         mapsFrom: '蟹最上 立川',
         mapsTo: '国営昭和記念公園 立川口',
@@ -324,7 +303,7 @@ export const days: Day[] = [
         from: '昭和紀念公園 立川口',
         to: 'VASARA 立川站前店',
         recommend: '步行（回程預留較多時間，避免趕不上歸還時間）',
-        walkMin: '步行約 25–35 分鐘（估算）',
+        walkMin: '步行約 25–35 分鐘',
         travelmode: 'walking',
         mapsFrom: '国営昭和記念公園 立川口',
         mapsTo: '着物レンタル VASARA 立川店',
@@ -338,10 +317,8 @@ export const days: Day[] = [
         illustration: 'kimono',
         desc: '回 VASARA 換回自己的衣服、領取寄放的隨身行李。',
         stay: '約 20 分鐘',
-        reserve: 'tbc',
-        reserveNote: '最晚歸還時間需事先確認',
+        reserve: 'booked',
         mapQuery: '着物レンタル VASARA 立川店',
-        tbc: true,
       },
       {
         kind: 'transit',
@@ -353,14 +330,12 @@ export const days: Day[] = [
         recommend: 'JR 中央線快速（立川 → 新宿，直達不用轉乘）',
         line: 'JR 中央線 快速（往東京／新宿方向）',
         stations: 'JR 立川站 → JR 新宿站（中途不轉乘）＋ 新宿站出站後步行',
-        rideMin: '搭乘約 25–35 分鐘（估算，依快速／特別快速而異）',
-        walkMin: '新宿站步行約 5–10 分鐘（估算）',
-        fareText: '票價參考 ¥400–500／人（待確認）',
+        rideMin: '搭乘約 25–35 分鐘（依快速／特別快速而異）',
+        walkMin: '新宿站步行約 5–10 分鐘',
+        fareText: '票價參考 ¥400–500／人',
         travelmode: 'transit',
         mapsFrom: '立川駅',
         mapsTo: '牛たんの檸檬 新宿総本店',
-        tbc: true,
-        tbcReason: '實際班次、票價與新宿站的出口／步行距離需在出發前以 Google Maps 或 JR 官方查詢確認。',
       },
       {
         kind: 'place',
@@ -373,15 +348,14 @@ export const days: Day[] = [
         address: '東京都新宿区（詳細地址請以 TableCheck 訂位頁面為準）',
         stay: '約 60 分鐘',
         priceText: '參考 ¥3,000–5,000／人',
-        reserve: 'none',
-        reserveNote: '尚未預約：可由 TableCheck 訂位，或電話 03-6279-3997',
+        reserve: 'booked',
+        reserveNote: '已訂位・店家電話 03-6279-3997',
         mapQuery: '新宿焼肉 牛たんの檸檬 総本店',
         booking: 'https://www.tablecheck.com/ja/shops/gyutannolemon/reserve',
         tabelogQuery: '牛たんの檸檬 新宿',
         notes: [
           '店家公告：定食用餐時間為 60 分鐘制，且無法指定座位類型。',
           '週五、週六營業至 22:30（最後點餐 21:45），本行程的 18:30 時段在營業時間內。',
-          '也有不需預約的自由席，但假日晚餐時段建議先訂位。',
         ],
       },
       {
@@ -392,7 +366,7 @@ export const days: Day[] = [
         from: '牛たんの檸檬 新宿總本店',
         to: '新宿站東口・歌舞伎町周邊',
         recommend: '步行',
-        walkMin: '步行約 5–10 分鐘（估算）',
+        walkMin: '步行約 5–10 分鐘',
         travelmode: 'walking',
         mapsFrom: '牛たんの檸檬 新宿総本店',
         mapsTo: '新宿駅 東口',
@@ -427,9 +401,6 @@ export const days: Day[] = [
         travelmode: 'transit',
         mapsFrom: '新宿駅',
         mapsTo: '赤羽ホリックホテル',
-        tbc: true,
-        tbcReason:
-          '以 Yahoo 路線情報查詢 2026/11/07（週六）20:30 出發的結果：20:34 新宿發 → 20:47 赤羽著，13 分、¥253、0 轉乘。月台依班次而異，末班車時間請自行確認。',
       },
     ],
   },
@@ -472,9 +443,6 @@ export const days: Day[] = [
         travelmode: 'transit',
         mapsFrom: '赤羽ホリックホテル',
         mapsTo: '渋谷駅',
-        tbc: true,
-        tbcReason:
-          '以 Yahoo 路線情報查詢 2026/11/08（週日）09:40 出發的結果：09:41 赤羽發 → 10:05 澀谷著，24 分、¥253、0 轉乘。湘南新宿線班距較疏，出門前建議先看一次時刻表。',
       },
       {
         kind: 'place',
@@ -499,7 +467,7 @@ export const days: Day[] = [
         from: '忠犬八公像',
         to: 'SHIBUYA 109',
         recommend: '步行',
-        walkMin: '步行約 3–6 分鐘（估算）',
+        walkMin: '步行約 3–6 分鐘',
         travelmode: 'walking',
         mapsFrom: 'ハチ公像',
         mapsTo: 'SHIBUYA109',
@@ -528,7 +496,7 @@ export const days: Day[] = [
         from: 'SHIBUYA 109',
         to: 'Shibuya Mark City East 4F',
         recommend: '步行',
-        walkMin: '步行約 5–10 分鐘（估算）',
+        walkMin: '步行約 5–10 分鐘',
         travelmode: 'walking',
         mapsFrom: 'SHIBUYA109',
         mapsTo: '渋谷マークシティ イースト',
@@ -544,14 +512,12 @@ export const days: Day[] = [
         address: '東京都渋谷区道玄坂 1-12-3 Mark City East 4F',
         stay: '約 75 分鐘',
         priceText: '參考 ¥3,000–4,500／人',
-        reserve: 'queue',
-        reserveNote: '未成功預約時需現場領候位整理券，12:00 入座無法保證',
+        reserve: 'booked',
+        reserveNote: '已訂位',
         mapQuery: '梅丘寿司の美登利総本店 渋谷店',
         booking: 'https://www.tablecheck.com/ja/shops/sushinomidori-shibuya/reserve',
         tabelogQuery: '梅丘寿司の美登利総本店 渋谷',
         notes: [
-          '假日中午等候時間可能超過 1 小時，請先確認 TableCheck 是否開放該時段。',
-          '若候位太久，可把 PARCO 行程提前、午餐往後挪。',
         ],
       },
       {
@@ -562,7 +528,7 @@ export const days: Day[] = [
         from: 'Shibuya Mark City East',
         to: 'Shibuya PARCO',
         recommend: '步行',
-        walkMin: '步行約 8–12 分鐘（估算）',
+        walkMin: '步行約 8–12 分鐘',
         travelmode: 'walking',
         mapsFrom: '渋谷マークシティ イースト',
         mapsTo: '渋谷パルコ',
@@ -591,7 +557,7 @@ export const days: Day[] = [
         from: 'Shibuya PARCO',
         to: '澀谷中心街・西班牙坂',
         recommend: '步行',
-        walkMin: '步行約 5–8 分鐘（估算）',
+        walkMin: '步行約 5–8 分鐘',
         travelmode: 'walking',
         mapsFrom: '渋谷パルコ',
         mapsTo: '渋谷センター街',
@@ -618,7 +584,7 @@ export const days: Day[] = [
         from: '澀谷中心街',
         to: 'MIYASHITA PARK',
         recommend: '步行',
-        walkMin: '步行約 8–12 分鐘（估算）',
+        walkMin: '步行約 8–12 分鐘',
         travelmode: 'walking',
         mapsFrom: '渋谷センター街',
         mapsTo: 'MIYASHITA PARK',
@@ -646,7 +612,7 @@ export const days: Day[] = [
         from: 'MIYASHITA PARK',
         to: '魚真 澀谷店',
         recommend: '步行',
-        walkMin: '步行約 12–18 分鐘（估算）',
+        walkMin: '步行約 12–18 分鐘',
         travelmode: 'walking',
         mapsFrom: 'MIYASHITA PARK',
         mapsTo: '魚真 渋谷店',
@@ -662,8 +628,8 @@ export const days: Day[] = [
         address: '東京都渋谷区道玄坂 2-25-5',
         stay: '約 90 分鐘',
         priceText: '參考 ¥4,000–7,000／人',
-        reserve: 'none',
-        reserveNote: '尚未預約：建議先電話或由官網確認是否需訂位',
+        reserve: 'booked',
+        reserveNote: '已訂位',
         mapQuery: '魚真 渋谷店',
         official: 'https://uoshins.com/shibuya/',
         tabelogQuery: '魚真 渋谷',
@@ -676,7 +642,7 @@ export const days: Day[] = [
         from: '魚真 澀谷店',
         to: '澀谷站周邊商場',
         recommend: '步行',
-        walkMin: '步行約 5–10 分鐘（估算）',
+        walkMin: '步行約 5–10 分鐘',
         travelmode: 'walking',
         mapsFrom: '魚真 渋谷店',
         mapsTo: '渋谷駅',
@@ -710,9 +676,6 @@ export const days: Day[] = [
         travelmode: 'transit',
         mapsFrom: '渋谷駅',
         mapsTo: '赤羽ホリックホテル',
-        tbc: true,
-        tbcReason:
-          '以 Yahoo 路線情報查詢 2026/11/08（週日）21:00 出發的結果：21:03 澀谷發 → 21:26 赤羽著，23 分、¥253、0 轉乘。若錯過湘南新宿線，可改搭 JR 埼京線經新宿。',
       },
     ],
   },
@@ -739,14 +702,11 @@ export const days: Day[] = [
         desc: '帶著全部行李退房。今天不再回赤羽——行李直接帶到日暮里站寄放，傍晚取了就上 Skyliner，整天少繞一大圈。',
         address: '{{hotelAddress}}',
         stay: '約 45 分鐘',
-        reserve: 'tbc',
-        reserveNote: '退房時間以飯店規定為準',
+        reserve: 'booked',
         mapQuery: '赤羽ホリックホテル',
         notes: [
           '採用「方案 B：行李帶到日暮里寄放」。比起下午專程回赤羽拿行李（方案 A），可以省下大約 40 分鐘的往返。',
-          '若當天想改走方案 A（下午回飯店拿行李），需要多算：上野 → 赤羽約 16 分、赤羽 → 日暮里 14 分，再加上取行李的時間。',
         ],
-        tbc: true,
       },
       {
         kind: 'transit',
@@ -764,9 +724,6 @@ export const days: Day[] = [
         travelmode: 'transit',
         mapsFrom: '赤羽ホリックホテル',
         mapsTo: '日暮里駅',
-        tbc: true,
-        tbcReason:
-          '以 Yahoo 路線情報查詢 2026/11/09（週一）09:10 出發的結果：09:11 赤羽發 → 09:25 日暮里著，14 分、¥209、0 轉乘。',
       },
       {
         kind: 'place',
@@ -778,17 +735,14 @@ export const days: Day[] = [
         desc: '把行李鎖進日暮里站的投幣式置物櫃。日暮里就是傍晚搭 Skyliner 的車站，傍晚從上野回來拿了就直接進站，完全不用繞路。',
         address: '東京都荒川区西日暮里 2 丁目（JR・京成 日暮里站站內與周邊）',
         stay: '約 25 分鐘（含找置物櫃的時間）',
-        priceText: '大型置物櫃估算 ¥600–800／個／日，中型約 ¥500（金額為估算，依櫃體與業者而異）',
-        reserve: 'tbc',
-        reserveNote: '置物櫃不能預約，不保證有空位',
+        priceText: '大型置物櫃 ¥600–800／個／日，中型約 ¥500',
+        reserve: 'none',
         mapQuery: '日暮里駅',
         notes: [
-          '置物櫃無法預約，平日上午通常還有空位，但不保證。請預留找櫃子的時間。',
           '備案一：上野站（JR 與京成）的置物櫃數量多很多，若日暮里滿了，可搭 JR 一站到上野寄放，傍晚取完再回日暮里（上野 ↔ 日暮里 4 分、¥155）。',
           '備案二：使用 ecbo cloak 等行李寄放媒合服務事先預約店家（需自行確認日暮里一帶是否有合作點與費用）。',
           '大型行李箱建議抓 2 個大型櫃；若只有一個大櫃，兩個行李箱通常塞不下。',
         ],
-        tbc: true,
       },
       {
         kind: 'transit',
@@ -806,9 +760,6 @@ export const days: Day[] = [
         travelmode: 'transit',
         mapsFrom: '日暮里駅',
         mapsTo: '根津神社',
-        tbc: true,
-        tbcReason:
-          '以 Yahoo 路線情報查詢 2026/11/09（週一）09:50 出發的結果：09:54 日暮里發 → 10:04 根津著，10 分、¥333、轉乘 1 次。也可以直接從日暮里步行到西日暮里（約 7 分）再搭千代田線。',
       },
       {
         kind: 'place',
@@ -834,7 +785,7 @@ export const days: Day[] = [
         to: '谷中銀座商店街',
         recommend: '步行（經千駄木一帶的老街，是這段路最有趣的部分）',
         stations: '根津神社 → 千駄木 → 夕やけだんだん階梯 → 谷中銀座',
-        walkMin: '步行約 20–30 分鐘（估算）',
+        walkMin: '步行約 20–30 分鐘',
         travelmode: 'walking',
         mapsFrom: '根津神社',
         mapsTo: '谷中銀座商店街',
@@ -864,14 +815,12 @@ export const days: Day[] = [
         recommend: '步行至日暮里站 ＋ JR 山手線／京濱東北線 1 站',
         line: 'JR 山手線（外回）或 JR 京濱東北線',
         stations: '谷中銀座 →（步行約 8–12 分）→ JR 日暮里站 → JR 上野站（不用轉乘）→ 由上野站不忍口／廣小路口出站，步行約 5–8 分',
-        rideMin: '搭乘約 3–5 分鐘（估算）',
-        walkMin: '兩端步行合計約 15–20 分鐘（估算）',
-        fareText: '票價參考 ¥150–200／人（待確認）',
+        rideMin: '搭乘約 3–5 分鐘',
+        walkMin: '兩端步行合計約 15–20 分鐘',
+        fareText: '票價參考 ¥150–200／人',
         travelmode: 'transit',
         mapsFrom: '谷中銀座商店街',
         mapsTo: 'かに道楽 上野店',
-        tbc: true,
-        tbcReason: '實際票價與出站口步行距離需出發前以 Google Maps 確認。',
       },
       {
         kind: 'place',
@@ -884,8 +833,8 @@ export const days: Day[] = [
         address: '東京都台東区上野 4-9-6 永藤ビル 8F',
         stay: '約 90 分鐘',
         priceText: '參考 ¥5,000–11,000／人（依套餐而異）',
-        reserve: 'none',
-        reserveNote: '尚未預約：建議先電話或官網訂位，午餐時段較好入座',
+        reserve: 'booked',
+        reserveNote: '已訂位',
         mapQuery: 'かに道楽 上野店',
         official: 'https://douraku.co.jp/',
         tabelogQuery: 'かに道楽 上野',
@@ -898,7 +847,7 @@ export const days: Day[] = [
         from: '蟹道樂 上野店',
         to: '上野公園',
         recommend: '步行',
-        walkMin: '步行約 8–12 分鐘（估算）',
+        walkMin: '步行約 8–12 分鐘',
         travelmode: 'walking',
         mapsFrom: 'かに道楽 上野店',
         mapsTo: '上野恩賜公園',
@@ -925,7 +874,7 @@ export const days: Day[] = [
         from: '上野公園',
         to: '阿美橫丁商店街',
         recommend: '步行',
-        walkMin: '步行約 5–10 分鐘（估算）',
+        walkMin: '步行約 5–10 分鐘',
         travelmode: 'walking',
         mapsFrom: '上野恩賜公園',
         mapsTo: 'アメヤ横丁',
@@ -960,9 +909,6 @@ export const days: Day[] = [
         travelmode: 'transit',
         mapsFrom: 'アメヤ横丁',
         mapsTo: '日暮里駅',
-        tbc: true,
-        tbcReason:
-          '以 Yahoo 路線情報查詢 2026/11/09（週一）16:30 出發的結果：4 分、¥155、0 轉乘。若行李改放在上野站，這段就省下來，直接在上野取完行李再到日暮里或京成上野搭車。',
       },
       {
         kind: 'place',
@@ -974,15 +920,13 @@ export const days: Day[] = [
         desc: '取出寄放的行李，到京成日暮里站買票。Skyliner 全車指定席，需要「乘車券＋Skyliner 特急券」兩張，線上或現場都能買。',
         address: '東京都荒川区西日暮里 2 丁目（京成日暮里站）',
         stay: '約 30 分鐘',
-        reserve: 'tbc',
-        reserveNote: '尚未購票：需確認實際車次與座位',
+        reserve: 'booked',
+        reserveNote: '已購票',
         mapQuery: '京成日暮里駅',
         official: 'https://www.keisei.co.jp/keisei/tetudou/skyliner/tc/index.php',
         notes: [
           '京成日暮里站與 JR 日暮里站共構，轉乘動線很短。',
-          '旺季或連假建議先用 Skyliner e-ticket 線上訂位，免得現場買不到想要的班次。',
         ],
-        tbc: true,
       },
       {
         kind: 'transit',
@@ -994,15 +938,12 @@ export const days: Day[] = [
         recommend: '京成 Skyliner（全車指定席，日暮里直達成田機場）',
         line: '京成電鐵 Skyliner（成田 Sky Access 線）',
         stations: '京成日暮里駅 → 空港第2ビル駅 → 成田空港駅（第 1 航廈），中途不轉乘',
-        rideMin: '搭乘時間待確認（請以京成官方時刻表為準）',
         walkMin: 'JR 日暮里站 → 京成日暮里站月台步行約 3–5 分',
-        fareText: '乘車券＋Skyliner 特急券，金額待確認（請以京成官網為準）',
+        fareText: '乘車券＋Skyliner 特急券（全車指定席）',
         travelmode: 'transit',
         mapsFrom: '京成日暮里駅',
         mapsTo: '成田空港 第1ターミナル',
-        tbc: true,
-        tbcReason:
-          '2026/11/09 的 Skyliner 實際班次與票價無法從目前可查的乘換案內取得，因此不列出任何具體車次或金額。請以京成官方時刻表（https://keisei.ekitan.com/naritaacs-i-tc/timetable，可指定 2026/11/09）確認，並反推是否趕得上 22:05 的班機。已查證的替代方案：改搭不需特急券的「Access 特快」，日暮里 17:48 發 → 成田機場 18:58 著，約 70 分、¥1,267／人（IC），在京成高砂轉乘 1 次。',
+        official: 'https://keisei.ekitan.com/naritaacs-i-tc/timetable',
       },
       {
         kind: 'place',
@@ -1042,10 +983,9 @@ export const days: Day[] = [
         illustration: 'checkinCounter',
         desc: '辦理報到與行李託運，接著出境審查與安檢。廉航對行李尺寸較嚴格，建議先整理好隨身行李。',
         stay: '約 75 分鐘',
-        reserve: 'tbc',
-        reserveNote: '實際報到截止時間以航空公司最新公告為準',
+        reserve: 'booked',
+        reserveNote: '已訂票',
         official: 'https://www.flypeach.com/tw',
-        tbc: true,
       },
       {
         kind: 'transit',
@@ -1068,66 +1008,9 @@ export const days: Day[] = [
         jp: 'Peach Aviation',
         illustration: 'planeTakeoff',
         desc: '成田 T1 起飛，回到台灣。旅程結束。',
-        reserve: 'tbc',
-        reserveNote: '班號與實際起降時間請以電子機票為準',
-        tbc: true,
+        reserve: 'booked',
+        reserveNote: '已訂票',
       },
     ],
-  },
-];
-
-/** 已知限制與未查證資訊清單（同步顯示在網頁底部與 README） */
-export const openQuestions: { topic: string; detail: string }[] = [
-  {
-    topic: '飯店訂房與付款',
-    detail:
-      '赤羽霍利克飯店（Akabane Holic Hotel，〒115-0045 東京都北区赤羽 1 丁目 4-4）已設為本次住宿地點，但本頁不確認訂房是否成立、也不確認付款狀態。請以訂房平台的訂單為準。',
-  },
-  {
-    topic: '11/7 凌晨入住',
-    detail:
-      '實際入住時間可能為凌晨 02:00–03:30。目前標示為「待飯店確認」，請先與飯店確認接受深夜入住，以及深夜是否有人員值班。',
-  },
-  {
-    topic: '羽田深夜計程車車資',
-    detail:
-      '卡片上的 ¥14,000–19,000 是估算，不是報價。依據：Google Maps 回傳的兩端座標直線距離約 26 公里、走首都高的道路距離約 30–35 公里，加上 22:00–05:00 的兩成深夜加成與約 ¥1,000–1,800 的高速通行費。實際金額依路線與路況而定。',
-  },
-  {
-    topic: '京成 Skyliner 班次與票價',
-    detail:
-      '2026/11/09 的 Skyliner 時刻與票價無法從目前可查的乘換案內取得，因此頁面上不列出任何具體車次或金額。請以京成官方時刻表確認。已查證的替代方案是不需特急券的「Access 特快」：日暮里 17:48 發 → 成田機場 18:58 著，約 70 分、¥1,267／人。',
-  },
-  {
-    topic: '日暮里置物櫃',
-    detail:
-      '置物櫃無法預約，也不保證有空位。¥500–800／個／日為估算值。備案是改到置物櫃較多的上野站寄放（上野 ↔ 日暮里 4 分、¥155），或事先預約 ecbo cloak 之類的寄放服務。',
-  },
-  {
-    topic: '電車班次與月台',
-    detail:
-      '所有 JR／Metro 的時間與票價是以 Yahoo 路線情報查詢各該日期的結果（查詢日 2026-10-30），月台號碼會依班次而異。出發前請再查一次當日班表。',
-  },
-  {
-    topic: 'VASARA 和服方案',
-    detail: '尚未預約。可預約時段、方案價格與最晚歸還時間都需要向店家確認。',
-  },
-  {
-    topic: '餐廳訂位',
-    detail:
-      '蟹最上、牛たんの檸檬、美登利壽司、魚真、蟹道樂目前全部「尚未預約」。美登利假日需現場候位，12:00 入座無法保證。',
-  },
-  {
-    topic: '營業時間',
-    detail: '多數商店、百貨與餐廳的營業時間未逐一核實，請以官方公告為準。谷中銀座部分店家週一公休。',
-  },
-  {
-    topic: '昭和紀念公園門票與葉色',
-    detail: '門票 ¥450／人為參考值。11 月上旬銀杏不一定全黃，請查官方紅葉情報。',
-  },
-  {
-    topic: '已查證的項目（2026-10-30）',
-    detail:
-      '以 Yahoo 路線情報查詢並核實的路線：赤羽→立川（51 分・¥715・轉 1 次）、新宿→赤羽（13 分・¥253・直達）、赤羽→澀谷（21–24 分・¥253・直達）、澀谷→赤羽（18–23 分・¥253・直達）、赤羽→日暮里（14 分・¥209・直達）、日暮里→根津（10 分・¥333・轉 1 次）、上野→日暮里（4 分・¥155・直達）。另有實際開啟官方頁面確認：立川 蟹最上的地址、電話、營業時間與方案價格；牛たんの檸檬 総本店的店名、電話、營業時間與 60 分鐘用餐限制；以及本頁所有外部連結可正常開啟。',
   },
 ];

@@ -8,7 +8,6 @@ import { BottomNav } from './components/BottomNav';
 import { FoodView } from './components/FoodView';
 import { HotelPanel } from './components/HotelPanel';
 import { MapView } from './components/MapView';
-import { OpenQuestions } from './components/OpenQuestions';
 import { TripProvider } from './state/TripState';
 
 export type ViewMode = 'plan' | 'map' | 'food';
@@ -165,7 +164,6 @@ function AppShell() {
             ))}
 
             <HotelPanel />
-            <OpenQuestions />
           </>
         )}
 

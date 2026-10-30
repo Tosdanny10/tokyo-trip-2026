@@ -35,11 +35,6 @@ export function PlaceCard({ item }: { item: PlaceItem }) {
           <div className="flex items-center gap-1.5">
             <Clock size={13} className="shrink-0 text-sakuraDeep" aria-hidden />
             <span className="text-[15px] font-bold tabular-nums tracking-wide text-sakuraDeep">{item.time}</span>
-            {item.tbc && (
-              <Badge className="bg-card text-coral ring-coral/40 dark:bg-nightCard dark:text-sakura dark:ring-sakura/40">
-                時間待確認
-              </Badge>
-            )}
           </div>
 
           <h3 className={`mt-0.5 text-[16px] font-bold leading-snug text-ink dark:text-stone-50 ${done ? 'line-through' : ''}`}>

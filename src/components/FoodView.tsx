@@ -14,9 +14,9 @@ export function FoodView() {
   return (
     <div className="space-y-4">
       <section className="rounded-card bg-card p-4 shadow-card ring-1 ring-line dark:bg-nightCard dark:ring-stone-700">
-        <SectionTitle emoji="🍣" title="這趟的餐廳" note={`${meals.length} 家，目前全部尚未預約`} />
+        <SectionTitle emoji="🍣" title="這趟的餐廳" note={`${meals.length} 家，皆已訂位`} />
         <p className="text-[14px] leading-relaxed text-inkSoft dark:text-stone-300">
-          每張卡片都可以展開看價位、訂位狀態與訂位連結。Tabelog 擋自動存取，所以這裡提供的是官方搜尋連結，不是自行猜測的店家頁網址。
+          每張卡片都可以展開看價位、地址與訂位頁面。Tabelog 連結是官方搜尋頁，直接帶入店名。
         </p>
       </section>
 

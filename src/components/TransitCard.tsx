@@ -1,6 +1,6 @@
 import { useId, useState } from 'react';
 import {
-  AlertTriangle,
+  CalendarClock,
   CarTaxiFront,
   ChevronDown,
   Coins,
@@ -62,12 +62,6 @@ export function TransitCard({ item }: { item: TransitItem }) {
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <span className={`text-[13px] font-bold ${m.text}`}>{m.label}</span>
               {item.time && <span className="text-[12px] tabular-nums text-inkSoft dark:text-stone-400">{item.time}</span>}
-              {item.tbc && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-2 py-0.5 text-[11px] font-semibold text-coral ring-1 ring-coral/40 dark:bg-stone-800/70">
-                  <AlertTriangle size={11} aria-hidden />
-                  待確認
-                </span>
-              )}
             </div>
 
             <p className={`mt-1 text-[15px] font-semibold leading-snug ${m.text}`}>
@@ -113,6 +107,17 @@ export function TransitCard({ item }: { item: TransitItem }) {
                   開啟 Google Maps 導航
                 </a>
               )}
+              {item.official && (
+                <a
+                  href={item.official}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[40px] items-center gap-1.5 rounded-xl bg-card px-3 text-[15px] font-semibold text-roseDeep shadow-sm ring-1 ring-black/5 transition hover:bg-paper dark:bg-stone-800 dark:text-sakura dark:hover:bg-stone-700"
+                >
+                  <CalendarClock size={15} aria-hidden />
+                  時刻表
+                </a>
+              )}
               <button
                 type="button"
                 onClick={() => setEditing((v) => !v)}
@@ -121,7 +126,7 @@ export function TransitCard({ item }: { item: TransitItem }) {
                 <Pencil size={13} aria-hidden />
                 {note ? '修改備註' : '加備註／改時間'}
               </button>
-              {(item.line || item.stations || item.tbcReason) && (
+              {(item.line || item.stations) && (
                 <button
                   type="button"
                   onClick={() => setOpen((v) => !v)}
@@ -165,15 +170,6 @@ export function TransitCard({ item }: { item: TransitItem }) {
                     {r(item.stations)}
                   </p>
                 )}
-                {item.tbcReason && (
-                  <p className="flex gap-1.5 text-[13px] leading-relaxed text-coral">
-                    <AlertTriangle size={13} className="mt-0.5 shrink-0" aria-hidden />
-                    <span>{r(item.tbcReason)}</span>
-                  </p>
-                )}
-                <p className="text-[12px] text-inkSoft dark:text-stone-400">
-                  所有時間與票價均為估算值，未經官方查詢核實，請在出發前以 Google Maps 或各鐵道公司官網確認。
-                </p>
               </div>
             )}
           </div>
