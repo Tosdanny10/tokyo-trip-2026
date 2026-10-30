@@ -19,10 +19,10 @@ export function DayBar({
       className={
         sticky
           ? 'pt-safe sticky top-0 z-30 -mx-3 border-b border-line/80 bg-cream/85 px-3 py-2 backdrop-blur-xl md:hidden dark:border-stone-700 dark:bg-night/90'
-          : 'flex gap-1'
+          : 'w-full'
       }
     >
-      <ul className="flex gap-1.5">
+      <ul className="flex w-full gap-1.5">
         {days.map((day) => {
           const active = day.id === activeDay;
           return (
